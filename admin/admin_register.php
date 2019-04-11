@@ -6,7 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Login</title>
-    <?php require dirname(__FILE__). './../inc/lib.php'; ?>
+    <?php 
+        require_once dirname(__FILE__). './../database/dboperation.php';     
+        require dirname(__FILE__). './../inc/lib.php';
+        require dirname(__FILE__). './../inc/utils.php';
+
+        utils::toastMessage();
+    ?>
 </head>
 
 <body>
@@ -14,50 +20,59 @@
         <div class="row justify-content-center mt-2">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Register</div>
+                    <div class="card-header bg-primary text-center"><h5>Register</h5></div>
                     <div class="card-body">
 
-                    <?php if (isset($_SESSION['msg_type'])) {
-                        echo '<div class="alert alert-' . $_SESSION['msg_type'] . '\"> role="alert"' 
-                        . $_SESSION['message'] .'</div>';
-                    }
+                        <?php 
+
+// if (isset($_SESSION['message'])) {
+//     echo " <div class='alert alert-" . $_SESSION['msg_type'] . "'>" .
+//         $_SESSION['message'] .
+//         "</div>";
+//     unset($_SESSION['message']);
+// }
+                            
+                            // if (isset($_SESSION['msg_type']) && isset($_SESSION['message'])) {
+                            //     alertMessage($_SESSION['message'], $_SESSION['msg_type']);
+                            //     unset($_SESSION['message']);
+                            //     unset($_SESSION['msg_type']);
+                            // }
+                            // utils::message();
                     ?>
 
-                        <form class="form-horizontal" method="post" action="">
+                        <form class="form-horizontal" method="post" action='../database/insert_admin.php'>
 
-                            <div class="row">
 
-                                <div class="form-group col">
-                                    <label for="name" class="cols-sm-2 control-label">First Name</label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"
-                                                        aria-hidden="true"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" name="firstName" id="first_name"
-                                                placeholder="Enter your Name" />
+                            <div class="form-group">
+                                <label for="name" class="cols-sm-2 control-label">First Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"
+                                                    aria-hidden="true"></i></span>
                                         </div>
+                                        <input type="text" class="form-control" name="firstName" id="first_name"
+                                            placeholder="First Name" />
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="form-group col">
-                                    <label for="name" class="cols-sm-2 control-label">Last Name</label>
-                                    <div class="cols-sm-10">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"
-                                                        aria-hidden="true"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control" name="lastName" id="last_name"
-                                                placeholder="Enter your Name" />
+                            <div class="form-group">
+                                <label for="name" class="cols-sm-2 control-label">Last Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"
+                                                    aria-hidden="true"></i></span>
                                         </div>
+                                        <input type="text" class="form-control" name="lastName" id="last_name"
+                                            placeholder="Last Name" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group ">
-                                <label for="name" class="cols-sm-10 control-label">User Name</label>
+                                <label for="name" class="cols-sm-10 control-label">Username</label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -65,7 +80,7 @@
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="text" class="form-control" name="username" id="username"
-                                            placeholder="Enter your Username" />
+                                            placeholder="Username" />
                                     </div>
                                 </div>
                             </div>
@@ -117,15 +132,9 @@
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <div class="col-sm-10">
-                                    <input type="radio" name="radio" value="yes" class="radio" id="gender"
-                                        <?php if (isset($_POST['radio']) && $_POST['radio'] == 'male'): ?>checked='checked'
-                                        <?php endif; ?> /> Male
-                                    <input type="radio" name="radio" value="no" class="radio"
-                                        <?php if (isset($_POST['radio']) && $_POST['radio'] ==  'female'): ?>checked='checked'
-                                        <?php endif; ?> /> Female
-                                    <input type="radio" name="radio" value="no" class="radio"
-                                        <?php if (isset($_POST['radio']) && $_POST['radio'] ==  'other'): ?>checked='checked'
-                                        <?php endif; ?> /> Other
+                                    <input type="radio" name="gender" value="male" class="radio" id="gender" /> Male
+                                    <input type="radio" name="gender" value="female" class="radio" /> Female
+                                    <input type="radio" name="gender" value="other" class="radio" /> Other
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -143,40 +152,48 @@
         </div>
     </div>
 
-    <?php
 
-    require_once dirname(__FILE__). './../database/dbconnect.php';
+<!-- for ajax way of registration -->
+    <!-- <script>
+        $(document).ready(function () {
+        $('form').submit(function (event) {
 
-    $database = new dbconnect();
+            // get the form data
+            // there are many ways to get this data using jQuery (you can use the class or id also)
+            var formData = {
+                'firstName': $('input[name=firstName]').val(),
+                'lastName': $('input[name=lastName]').val(),
+                'username': $('input[name=username]').val(),
+                'email': $('input[name=email]').val(),
+                'password': $('input[name=password]').val(),
+                'gender': $('input[name=gender]:checked').val()
+            };
 
-    if (isset($_POST['register_btn'])) {
-        $mysqli = $database -> connect();
+            // process the form
+            $.ajax({
+                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
+                    url: '../database/insertUser.php', // the url where we want to POST
+                    data: formData, // our data object
+                    dataType: 'json', // what type of data do we expect back from the server
+                    encode: true
+                })
+                // using the done promise callback
+                .done(function (data) {
 
-        $query = "INSERT  INTO `admin`(`id`, `firstName`, `lastName`, `username`, `email`, `password`, `gender`)
-            VALUES (NULL, ?, ? , ? , ? , ? , ?) ;";
+                    // log data to the console so we can see
+                    console.log(data);
 
-        $stmt = $mysqli -> prepare($query);
-        $stmt -> bind_param('ssssss',$_POST['firstName'], $_POST['lastName'], $_POST['username'], 
-            $_POST['email'], $_POST['password'], $_POST['radio']);
+                    // here we will handle errors and validation messages
+                }).fail(function (data) {
+                    console.log(data);
+                });
 
-        if ($stmt -> execute()) {
-            $_SESSION['message'] = "Registered Successfully";
-            $_SESSION['msg_type'] = "success";
-            header('Location:index.php?');
-            exit;
-        } else {
-            $_SESSION['message'] = "Registeration Error";
-            $_SESSION['msg_type'] = "warning";
-            // header('Location:admin_login.php?');
-            exit;
-        }
-    }
+            // stop the form from submitting the normal way and refreshing the page
+            event.preventDefault();
+        });
 
-    function isUserExist($email, $username) {
-        
-    }
-
-?>
+        });
+    </script> -->
 </body>
 
 </html>

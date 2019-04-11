@@ -2,13 +2,21 @@
 <html>
 
 <?php
-  session_start();
-  
+
+  // session_start();
+  require_once '../database/dbconnect.php';
+
+  require_once '../inc/utils.php';
+
   // If user already logged in, send them to index
-if (  empty( $_SESSION['admin'] ) ) {
-  // header('Location:admin_login.php?');
-  exit;
-}
+
+  utils::checkAdminLogin();
+// if (!isset( $_SESSION['isAdmin']) && $_SESSION['admin'] == "true" ) {
+//   header('Location:admin_login.php?');
+//   exit;
+// }
+
+  utils::toastMessage();
 
 ?>
 
@@ -311,7 +319,8 @@ if (  empty( $_SESSION['admin'] ) ) {
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="./admin_logout.php?logout=true" onclick="return confirm('Logout?');" name="logout"
+                      class="btn btn-default btn-flat">Log out</a>
                   </div>
                 </li>
               </ul>
@@ -633,7 +642,7 @@ if (  empty( $_SESSION['admin'] ) ) {
 
             <!-- Chat box -->
             <div class="box box-success">
-              <div class="box-header">  
+              <div class="box-header">
                 <i class="fa fa-comments-o"></i>
 
                 <h3 class="box-title">Chat</h3>

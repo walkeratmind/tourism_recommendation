@@ -1,7 +1,10 @@
 <?php
-    require_once dirname(__FILE__).'../../database/dbconnect.php';
+    require_once '../inc/utils.php';
 
+    require_once dirname(__FILE__). './../database/dbconnect.php';
     $database = new dbconnect();
+
+    utils::toastMessage();
 ?>
 
 <!DOCTYPE html>
@@ -623,13 +626,16 @@
                     <!-- ./col -->
                 </div>
 
-                <button class="btn btn-sm btn-info btn-flat my-auto " data-toggle="modal"
-                            data-target="#formModal"><i class="fa fa-plus-square"></i> Add Destination</button>
+                <button class="btn btn-sm btn-info btn-flat my-auto " data-toggle="modal" data-target="#formModal"><i
+                        class="fa fa-plus-square"></i> Add Destination</button>
 
+                <?php
+                    // utils::message();
+                ?>
                 <!-- Destination Lists -->
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        
+
                         <h3 class="box-title">Destinations</h3>
 
                         <div class="box-tools pull-right">
@@ -641,38 +647,22 @@
                         </div>
                     </div>
 
-                    <!-- <style>
-                        thead,
-                        tbody {
-                            display: block; 
-                        }
-
-                        tbody {
-                            height: 680px;
-                            /* Just for the demo          */
-                            overflow-y: auto;
-                            /* Trigger vertical scroll    */
-                            overflow-x: hidden;
-                            /* Hide the horizontal scroll */
-                        }
-                    </style> -->
-
                     <!-- /.box-header -->
                     <div class="box-body">
 
                         <div class="table-responsive">
 
-                        <!-- destinations table -->
-                            <table class="table no-margin">
+                            <!-- destinations table -->
+                            <table class="table no-margin table-hover table-fixed">
                                 <thead>
                                     <tr>
-                                        <th>Serial No.</th>
-                                        <th>ID</th>
-                                        <th>Image</th>
-                                        <th>Place</th>
-                                        <th>Location</th>
-                                        <th>Description</th>
-                                        <th>Popularity</th>
+                                        <th class="">Serial No.</th>
+                                        <th class="">ID</th>
+                                        <th class="">Image</th>
+                                        <th class="">Place</th>
+                                        <th class="">Location</th>
+                                        <th class="">Description</th>
+                                        <th class="">Popularity</th>
                                     </tr>
                                 </thead>
 
@@ -711,6 +701,8 @@
                                                 echo '<td>'. $location . '</td>';
 
                                                 echo '<td>' . $description . '</td>';
+
+                                                echo '<td>' . 'popularity here' . '</td>';
                                                 
 
                                              echo "</tr>";
@@ -968,13 +960,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Add Destination</h4>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Destination</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <!-- form for adding destination -->
-                <form class="" action="" method="POST" enctype='multipart/form-data'>
+                <form class="" action="../database/insert_destination.php" method="POST" enctype='multipart/form-data'>
 
                     <div class="modal-body">
 
@@ -1005,52 +997,6 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                     </div>
-
-                    <?php
-                        if (isset($_POST['submit']) && 
-                        isset($_POST['name'])
-                        ) {
-
-                            $image = $_FILES['image']['name'];    //image
-                            
-                            $target_dir = SITE_ROOT . "/../imageUploads/";
-                            $target_file = $target_dir . basename($_FILES["image"]["name"]);
-
-                            // Select file type
-                            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-                            // Valid file extensions
-                            $extensions_arr = array("jpg","jpeg","png","gif");
-                          
-                            // Check extension
-                            if( in_array($imageFileType,$extensions_arr) ){
-                            
-                                $mysqli = $database -> connect();
-
-                                $sql_query = "INSERT INTO `destination`(`id`, `name`, `location`, `description`, `image`)
-                                VALUES (NULL, ?, ?, ? , ?);";
-
-                                $stmt = $mysqli ->prepare($sql_query);
-
-                                $stmt -> bind_param('ssss', $_POST['name'],$_POST['location'], $_POST['description'], $image);
-                                echo "<script> console.log(' image ')</script>";
-
-                                // Insert record
-                                if ($stmt->execute()) {
-                                    // Upload file
-                                    move_uploaded_file($_FILES['image']['tmp_name'], IMAGE_PATH. $image);
-
-                                    echo "<script> console.log(' image uploaded')</script>";
-
-                                } else {
-                                    echo "error inserting : ". mysqli_error($con);
-                                    echo "<script> console.log(' image uploaded failed')</script>";
-                                }
-                                $stmt -> close();    
-                                $mysqli -> close();
-                            }
-                        }
-                    ?>
                 </form>
             </div>
         </div>

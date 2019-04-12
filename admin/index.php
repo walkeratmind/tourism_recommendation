@@ -375,8 +375,13 @@
           </li>
 
           <!-- for add events and add destination -->
-          <li><a href="add_event.php"><i class="fa fa-calendar"></i> Events</a></li>
-          <li><a href="add_destination.php"><i class="fa fa-plane"></i> Destination</a></li>
+          <li class="">
+            <a href="add_event.php"><i class="fa fa-calendar"></i> <span>Events</span></a>
+          </li>
+
+          <li class="">
+            <a href="add_destination.php"><i class="fa fa-plane"></i> <span>Destination</span></a>
+          </li>
 
           <li class="treeview">
             <a href="#">

@@ -375,8 +375,8 @@
                     </li>
 
                     <!-- for add events and add destination -->
-                    <li><a href="add_event.php"><i class="fa fa-calendar"></i> Events</a></li>
-                    <li><a href="add_destination.php"><i class="fa fa-plane"></i> Destination</a></li>
+                    <li><a href="add_event.php"><i class="fa fa-calendar"></i> <span>Events</span></a></li>
+                    <li><a href="add_destination.php"><i class="fa fa-plane"></i> <span>Destination</span></a></li>
 
                     <li class="treeview">
                         <a href="#">
@@ -955,12 +955,12 @@
     <!-- ./wrapper -->
 
     <!-- Add Destination Form Modal -->
-    <div class="modal   " id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Destination</h5>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">Add Destination</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

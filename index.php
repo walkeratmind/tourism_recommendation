@@ -17,7 +17,7 @@ $database = new dbconnect();
 	.image-carousel {
 		display: block;
 		max-width: 100%;
-		height: 380px;
+		height: 35rem;
 
 	}
 </style>
@@ -53,6 +53,75 @@ $database = new dbconnect();
     }
 ?>
 
+<div class="carousel-container">
+	<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img class="d-block w-100  image-carousel" src="img/swoyambhu.jpg" alt="First slide">
+
+				<div class="caption-box">
+
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Swoyambhu</h5>
+						<p>Home is where the heart is</p>
+					</div>
+				</div>
+
+				<style>
+					.caption-box,
+					.carousel-caption {
+						background: #000;
+						opacity: 0.8;
+						left: 0;
+						width: 100%;
+						/* margin-bottom: 0; */
+
+					}
+					/* .carousel-indicators {
+						margin-bottom: 0;
+					} */
+				</style>
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100 image-carousel" src="img/lake.jpeg" alt="Second slide">
+
+				<div class="caption-box">
+
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Pokhara</h5>
+						<p>Home is where the heart is</p>
+					</div>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100 image-carousel" src="img/lumbini.jpg" alt="Third slide">
+
+				<div class="caption-box">
+
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Lumbini</h5>
+						<p>Home is where the heart is</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+
+</div>
+
 <div class="container">
 	<h5>Welcome to Tourism Recommendation</h5>
 
@@ -73,69 +142,55 @@ $database = new dbconnect();
 
 	</div>
 
-	<!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img class="d-block w-75" src="img/swoyambhu.jpg" alt="First slide">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="lake.jpeg"
-					alt="Second slide">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-75" src="lumbini.jpg" alt="Third slide">
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div> -->
-
-</div>
 
 
-<?php
+	<?php
 include './footer.php';
 ?>
 
-<script>
-	// $('.carousel').carousel({
-	// 	interval: 2000
-	// });
-	$(document).ready(function () {
-		$(".owl-carousel").owlCarousel({
-			items: 3,
-			loop: true,
-			margin: 10,
-			center: true,
-			nav: true,
-			// autoheight: true,
-			autoplay: true,
-			autoplayTimeout: 2000,
-			autoplayHoverPause: true,
-			responsive: {
-				0: {
-					items: 1
-				},
-				600: {
-					items: 3
-				},
-				1000: {
-					items: 4
-				}
-			}
-		});
-	});
-</script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+	</script>
 
-<!-- TODO : Admin Login and user login feature -->
+	<script>
+		// $('.carousel').carousel({
+		// 	interval: 4000
+		// });
+
+		// if ($('.carousel').is(":hover")) {
+
+		// }
+
+		// $(document).ready(function () {
+		// 	$(".owl-carousel").owlCarousel({
+		// 		items: 3,
+		// 		loop: true,
+		// 		margin: 10,
+		// 		center: true,
+		// 		nav: true,
+		// 		// autoheight: true,
+		// 		autoplay: true,
+		// 		autoplayTimeout: 2000,
+		// 		autoplayHoverPause: true,
+		// 		responsive: {
+		// 			0: {
+		// 				items: 1
+		// 			},
+		// 			600: {
+		// 				items: 3
+		// 			},
+		// 			1000: {
+		// 				items: 4
+		// 			}
+		// 		}
+		// 	});
+		// });
+	</script>
+
+	<!-- TODO : Admin Login and user login feature -->

@@ -108,7 +108,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
                                                 <span><i class="fa fa-list"></i>View</span>
                                             </a>' .
     
-                                            '<a class="option" href="./add_destination_form.php?id=' . $id . '">
+                                            '<a class="option" href="./add_event_form.php?id=' . $id . '">
                                                 <span class="update_btn" ><i class="fa fa-edit"></i>Update</span>
                                             </a>' .
     

@@ -110,4 +110,11 @@ function alertMessage($message, $msg_type)
         "</div>";
 }
 
-?>  
+?>
+
+<html>
+
+<link rel="stylesheet" type="text/css" href="../assets/snackbar/snackbar.min.css" />
+<script src="../assets/snackbar/snackbar.min.js"></script>
+
+</html>

@@ -6,4 +6,6 @@
 
   utils::checkAdminLogin();
 
+  utils::toastMessage();
+
 ?>

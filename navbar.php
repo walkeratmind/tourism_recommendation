@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . './database/dboperation.php';
 
-// require_once dirname(__FILE__) . './inc/lib.php';
+require_once dirname(__FILE__) . './inc/lib.php';
 ?>
 
 <div class="navBar sticky-top">

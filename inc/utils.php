@@ -1,5 +1,7 @@
 <?php
 
+    require_once dirname(__FILE__) . './../database/dbconnect.php';
+
 class utils
 {
 
@@ -17,7 +19,7 @@ class utils
     public static function message()
     {
         if (isset($_SESSION['message'])) {
-            echo " <div class='alert alert-" . $_SESSION['msg_type'] . "'>" .
+            echo " <div id='alert-message' class='alert alert-" . $_SESSION['msg_type'] . "'>" .
                 $_SESSION['message'] .
                 "</div>";
             unset($_SESSION['message']);
@@ -39,6 +41,7 @@ class utils
 
     }
 
+    // for Admin Authentication
     public static function isAdmin()
     {
         if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] === true)
@@ -55,6 +58,49 @@ class utils
             header('location: ./admin_login.php');
         }
     }
+
+
+    // for users authentication
+    public static function isUser()
+    {
+        if (isset($_SESSION['isUser']) && $_SESSION['isUser'] === true)
+            return true;
+
+        return false;
+    }
+    public static function checkUserLogin()
+    {
+        if (!utils::isUser()) {
+            $_SESSION['msg_type'] = 'danger';
+            $_SESSION['message'] = "Invalid Login";
+            header('location: ./index.php');
+        } else {
+            $_SESSION['msg_type'] = 'success';
+            $_SESSION['message'] = "Logged In";
+            header('location: ./index.php');
+        }
+    }
+
+    //if total word is passed then , it is assigned otherwise
+    // default value is 3
+    public static function getDefinateString($string, $total_words = 3) {
+        $arr = preg_split('/[,\ \.;]/', $string);
+        $keywords = array_unique($arr);
+        $result =  '';
+        $i=0;
+        foreach ($keywords as $keyword){
+                    if ((preg_match("/^[a-z0-9]/", $keyword) )){
+                            $result = $result . $keyword . ' ';
+                            $i++;
+                            if ($i== $total_words) {
+                                $result = $result . '...';
+                                break;
+                            };
+                            
+                    }
+                }
+        return $result;
+    }
 }
 
 function alertMessage($message, $msg_type)
@@ -64,11 +110,4 @@ function alertMessage($message, $msg_type)
         "</div>";
 }
 
-?>
-
-<html>
-<link rel="stylesheet" type="text/css" href="../assets/snackbar/snackbar.min.css" />
-<script src="../assets/snackbar/snackbar.min.js">
-</script>
-
-</html>
+?>  

@@ -7,9 +7,8 @@
  define ('SITE_ROOT', realpath(dirname(__FILE__)));
  define ('IMAGE_PATH', SITE_ROOT . "/../imageUploads/");
  
-
  session_start();
- 
+
  class dbconnect {
    private $con;
 

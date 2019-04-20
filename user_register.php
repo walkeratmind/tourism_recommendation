@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login</title>
+    <title>User Login</title>
     <?php 
-        require_once dirname(__FILE__). './../database/dboperation.php';     
-        require dirname(__FILE__). './../inc/lib.php';
-        require dirname(__FILE__). './../inc/utils.php';
+        require_once dirname(__FILE__). './database/dboperation.php';  
+        require_once dirname(__FILE__) . './header.php';   
+        // require_once dirname(__FILE__). './inc/utils.php';
 
         utils::toastMessage();
     ?>
@@ -40,7 +40,7 @@
                             // utils::message();
                     ?>
 
-                        <form class="form-horizontal" method="post" action='../database/insert_admin.php'>
+                        <form class="form-horizontal needs-validation" novalidate method="post" action='./database/insert_user.php'>
 
                             <div class="form-group">
                                 <label for="name" class="cols-sm-2 control-label">First Name</label>
@@ -51,7 +51,7 @@
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="text" class="form-control" name="firstName" id="first_name"
-                                            placeholder="First Name" />
+                                            placeholder="First Name" required />
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="text" class="form-control" name="lastName" id="last_name"
-                                            placeholder="Last Name" />
+                                            placeholder="Last Name" required />
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="text" class="form-control" name="username" id="username"
-                                            placeholder="Username" />
+                                            placeholder="Username" required/>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +93,8 @@
                                             <span class="input-group-text"><i class="fas fa-envelope"
                                                     aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" name="email" id="email"
-                                            placeholder="Enter your Email" />
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            placeholder="Enter your Email" required/>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                         </div>
 
                                         <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Enter your Password" />
+                                            placeholder="Enter your Password" required/>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="password" class="form-control" name="confirm" id="confirm"
-                                            placeholder="Confirm your Password" />
+                                            placeholder="Confirm your Password" required/>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                     class="btn btn-primary btn-lg btn-block login-button">Register</button>
                             </div>
                             <div class="login-register">
-                                <a class="btn btn-primary btn-lg btn-block" href="index.php">Login</a>
+                                <a class="btn btn-primary btn-lg btn-block" href="user_login.php">Login</a>
                             </div>
                         </form>
                     </div>
@@ -151,7 +151,25 @@
         </div>
     </div>
 
-
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 <!-- for ajax way of registration -->
     <!-- <script>
         $(document).ready(function () {

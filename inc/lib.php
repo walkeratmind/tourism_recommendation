@@ -1,10 +1,10 @@
 <?php
-
+    // require_once dirname(__FILE__) . './editor_lib.php';
 
 ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<link rel="stylesheet" href="./../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
 <!-- for carousel -->
 <link rel="stylesheet" href="owlcarousel/assets/owl.carousel.min.css">
@@ -21,5 +21,10 @@
 </script>
 <link rel="stylesheet" href="../js/bootstrap.min.js">
 
+
+
 <!-- for owl carousel -->
 <script src="owlcarousel/owl.carousel.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../assets/snackbar/snackbar.min.css" />
+<script src="../assets/snackbar/snackbar.min.js"></script>

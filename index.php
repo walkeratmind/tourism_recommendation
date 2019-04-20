@@ -1,11 +1,26 @@
 <?php
+require_once dirname(__FILE__) . './database/dbconnect.php';
 require  dirname(__FILE__) . './header.php';
 
-require_once dirname(__FILE__) . './database/dbconnect.php';
+require_once dirname(__FILE__) . './inc/utils.php';
 
-$database = new dbconnect();
+	$database = new dbconnect();
 
+	// utils::toastClientSide();
+
+	// $_SESSION['message'] = 'hello';
+	utils::toastMessage();
+	// utils::message();
 ?>
+
+<!-- <script>
+	// for auto close bootstrap alert
+	$(document).ready(function() {
+		$("#alert-message").fadeTo(2000, 500).slideUp(500, function(){
+               $("#alert-message").slideUp(500);
+                });
+	});
+</script> -->
 <style>
 	.image-fluid {
 		display: block;
@@ -24,33 +39,32 @@ $database = new dbconnect();
 
 <?php
 
-    $mysqli = $database -> connect();
+$mysqli = $database->connect();
 
-    $query = "SELECT name, image FROM `destination` ";
+$query = "SELECT name, image FROM `destination` ";
 
-    $stmt = $mysqli -> prepare( $query );
+$stmt = $mysqli->prepare($query);
 
-    // echo "<script>console.log('hello')</script>";
+// echo "<script>console.log('hello')</script>";
 
-    if ($stmt -> execute()) {
-        
-        $stmt -> bind_result($name, $image);
-        
-		$img_path = "./imageUploads/";
-		
-		$img_arr = array();
-		
-		$i = 0;
-        while ($stmt -> fetch()) {
+if ($stmt->execute()) {
 
-			$img= $img_path . $image;
-			array_push($img_arr, $img);
-			if ($i++ == 10) break;
-        }
-    $stmt -> close();
-    $mysqli -> close();
+	$stmt->bind_result($name, $image);
 
-    }
+	$img_path = "./imageUploads/";
+
+	$img_arr = array();
+
+	$i = 0;
+	while ($stmt->fetch()) {
+
+		$img = $img_path . $image;
+		array_push($img_arr, $img);
+		if ($i++ == 10) break;
+	}
+	$stmt->close();
+	$mysqli->close();
+}
 ?>
 
 <div class="carousel-container">
@@ -82,6 +96,7 @@ $database = new dbconnect();
 						/* margin-bottom: 0; */
 
 					}
+
 					/* .carousel-indicators {
 						margin-bottom: 0;
 					} */
@@ -123,45 +138,22 @@ $database = new dbconnect();
 </div>
 
 <div class="container">
-	<h5>Welcome to Tourism Recommendation</h5>
+	<!-- <h5>Welcome to Tourism Recommendation</h5> -->
 
-	<div class="owl-carousel owl-theme">
-		<?php for ($i = 0; $i < count($img_arr); $i++) {
-			echo '<div class="item"><a href=""><img class="image-carousel" src="' . $img_arr[$i] . '" alt="image"
-				 ></a></div>
-			';
-		}
-			?>
-
-		<?php  ?>
-		<!-- <div class="item"><a href=""><img class="image-fluid" src="img/lake.jpeg" alt="image"></a></div>
-		<div class="item"><a href=""><img class="image-fluid rounded float-left" src="img/lumbini.jpg" alt="image"></a>
-		</div>
-		<div class="item"><a href=""><img class="image-fluid" src="img/janaki.jpg" alt="image"></a></div>
-		<div class="item"><a href=""><img class="image-fluid " src="img/mountain.jpg" alt="image"></a></div> -->
-
-	</div>
 
 
 
 	<?php
-include './footer.php';
-?>
+	require_once './destination.php';
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-	</script>
+	require_once dirname(__FILE__) . './footer.php';
+	?>
 
+	
 	<script>
-		// $('.carousel').carousel({
-		// 	interval: 4000
-		// });
+		$('.carousel').carousel({
+			interval: 3000
+		});
 
 		// if ($('.carousel').is(":hover")) {
 

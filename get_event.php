@@ -11,11 +11,11 @@
 
             echo '<script> console.log("Clicked: '. $id .'")</script>';
 
-            $tableName = 'destination';
+            $tableName = 'event';
             $result = $db->getSingleData($tableName ,$id);
             echo '<script> console.log("Result: '. $result .'")</script>';
 
-            $destination =  json_decode($result, true);
+            $event =  json_decode($result, true);
             // echo implode(",", $obj);
 
         }
@@ -51,14 +51,14 @@
 
     <?php
          $img_path = './imageUploads/';
-         echo '<div><img src="' . $img_path . $destination['image'] . '" class="image-container" alt="image">' . '</div>';
+         echo '<div><img src="' . $img_path . $event['image'] . '" class="image-container" alt="image">' . '</div>';
     ?>
 <div class="container">
     <div id="title">
-        <h4><?php echo $destination['name']; ?></h4>
+        <h4><?php echo $event['eventName']; ?></h4>
     </div>
-    <span id="location" class=""><?php echo $destination['location']; ?></span>
-    <div id="description" class="mt-5">
-        <p><?php echo $destination['description']; ?></p>
+    <span id="location" class=""><?php echo $event['location']; ?></span>
+    <div id="event" class="mt-5">
+        <p><?php echo $event['description']; ?></p>
     </div>
 </div>

@@ -21,6 +21,9 @@ require_once dirname(__FILE__) . './inc/lib.php';
         <li class="nav-item">
           <a class="nav-link" href="events.php">Events</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="blog.php">Blog</a>
+        </li>
       </ul>
 
       <ul class="navbar-nav navbar-right mr-4">
@@ -80,13 +83,22 @@ require_once dirname(__FILE__) . './inc/lib.php';
                   data-toggle="modal" data-target="#feedbackFormModal"> Send Feedback
                   </div>';
 
+                  echo '<div id="post_list" class="dropdown-item btn btn-primary"> 
+                    <a href="post_list.php" >My Posts</a>
+                  </div>';
+
                 echo '<div class="dropdown-divider"></div>';
                 $output = '<a href="./user_logout.php?logout=true" class="btn btn-primary logout-btn dropdown-item" 
                   onclick="return confirm(\'Logout?\');">Logout</a>';
                 echo $output;
               }
               ?>
-
+              <style>
+                #post_list a{
+                  text-decoration: none;
+                  color: darkgray;
+                }
+              </style>
             </div>
           </div>
         </li>

@@ -43,7 +43,7 @@ class utils
 
     public static function alertMessage($message, $msg_type)
     {
-        echo " <div class='alert alert-" . $msg_type . "'>" .
+        echo " <div class='text-center alert alert-" . $msg_type . "'>" .
             $message .
             "</div>";
     }

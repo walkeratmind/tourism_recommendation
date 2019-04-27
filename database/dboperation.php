@@ -23,7 +23,7 @@ class dboperation
 
     function isEmailExist($tableName, $email)
     {
-        $query = "SELECT id from " . $tableName . " WHERE email=?";
+        $query = "SELECT id FROM " . $tableName . " WHERE email=?";
 
         $statement = $this->conn->prepare($query);
 

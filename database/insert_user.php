@@ -9,11 +9,15 @@
     if (isset($_POST['register_btn'])) {
         $mysqli = $database -> connect();
 
+        $firstName = ucfirst(strtolower($_POST['firstName']));
+        $lastName = ucfirst(strtolower($_POST['lastName']));
+        $username = strtolower($_POST['username']);
+
         $query = "INSERT  INTO `user`(`id`, `firstName`, `lastName`, `username`, `email`, `password`, `gender`)
             VALUES (NULL, ?, ? , ? , ? , ? , ?) ;";
 
         $stmt = $mysqli -> prepare($query);
-        $stmt -> bind_param('ssssss',$_POST['firstName'], $_POST['lastName'], $_POST['username'], 
+        $stmt -> bind_param('ssssss',$firstName, $lastName, $username,
             $_POST['email'], $_POST['password'], $_POST['gender']);
 
         if ($stmt -> execute()) {

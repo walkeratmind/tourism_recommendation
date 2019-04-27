@@ -10,7 +10,7 @@
 
             $tableName = 'user';
 
-            $id = $database->login($_POST['email'], $_POST['password'], $tableName);
+            $id = $database->login($tableName, $_POST['email'], $_POST['password']);
             if ($id) {
                 $_SESSION['isUser'] = true;
                 $_SESSION['user_id'] = $id['id'];

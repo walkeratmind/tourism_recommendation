@@ -20,6 +20,20 @@
         ?>
 </head>
 
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<style>
+    @font-face {
+        /* font-family: Arial, Helvetica, sans-serif; */
+        /* font-family: Roboto, Arial, Helvetica, sans-serif; */
+        /* src: url('assets/fonts/Roboto/Roboto-Regular.ttf'); */
+    }
+    * {
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+    }
+
+</style>
+
 <body>
     <?php require_once dirname(__FILE__). './navbar.php';            
             ?>

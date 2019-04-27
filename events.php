@@ -15,7 +15,7 @@ $database = new dbconnect();
 
   $mysqli = $database->connect();
 
-  $query = "SELECT * FROM `event` ";
+  $query = "SELECT * FROM `event` ORDER BY id DESC";
 
   $stmt = $mysqli->prepare($query);
 
@@ -76,6 +76,7 @@ $database = new dbconnect();
   }
 
   .item {
+    position: relative;
     overflow: hidden;
   }
 

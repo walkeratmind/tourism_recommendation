@@ -15,7 +15,7 @@ $database = new dbconnect();
 
   $mysqli = $database->connect();
 
-  $query = "SELECT * FROM `destination` ";
+  $query = "SELECT * FROM `destination` ORDER BY id DESC";
 
   $stmt = $mysqli->prepare($query);
 

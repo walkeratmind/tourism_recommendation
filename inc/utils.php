@@ -1,6 +1,6 @@
 <?php
 
-    require_once dirname(__FILE__) . './../database/dbconnect.php';
+require_once dirname(__FILE__) . './../database/dbconnect.php';
 
 class utils
 {
@@ -31,14 +31,21 @@ class utils
         if (isset($_SESSION['message'])) {
             echo "<script>
             Snackbar.show({
-                text: '". $_SESSION['message'] ."',
+                text: '" . $_SESSION['message'] . "',
                 pos:'bottom-center',
                 duration: '3000'
             }); </script>";
             unset($_SESSION['message']);
-         }
+        }
         //  unset($_SESSION['messsage']);
 
+    }
+
+    public static function alertMessage($message, $msg_type)
+    {
+        echo " <div class='alert alert-" . $msg_type . "'>" .
+            $message .
+            "</div>";
     }
 
     // for Admin Authentication
@@ -83,31 +90,24 @@ class utils
 
     //if total word is passed then , it is assigned otherwise
     // default value is 3
-    public static function getDefinateString($string, $total_words = 3) {
+    public static function getDefinateString($string, $total_words = 3)
+    {
         $arr = preg_split('/[,\ \.;]/', $string);
         $keywords = array_unique($arr);
         $result =  '';
-        $i=0;
-        foreach ($keywords as $keyword){
-                    if ((preg_match("/^[a-z0-9]/", $keyword) )){
-                            $result = $result . $keyword . ' ';
-                            $i++;
-                            if ($i== $total_words) {
-                                $result = $result . '...';
-                                break;
-                            };
-                            
-                    }
-                }
+        $i = 0;
+        foreach ($keywords as $keyword) {
+            if ((preg_match("/^[a-z0-9]/", $keyword))) {
+                $result = $result . $keyword . ' ';
+                $i++;
+                if ($i == $total_words) {
+                    $result = $result . '...';
+                    break;
+                };
+            }
+        }
         return $result;
     }
-}
-
-function alertMessage($message, $msg_type)
-{
-    echo " <div class='alert alert-" . $msg_type . "'>" .
-        $message .
-        "</div>";
 }
 
 ?>

@@ -12,8 +12,10 @@
             $tableName = 'admin';
             
 
-            if ($database->login($_POST['username'], $_POST['password'], $tableName)) {
+            $admin = $database->login($tableName, $_POST['username'], $_POST['password']);
+            if ($admin) {
                 $_SESSION['isAdmin'] = true;
+                $_SESSION['admin_id'] = $admin['id'];
                 $_SESSION['msg_type'] = 'success';
                 $_SESSION['message'] = 'Login Successful';
                 header('location: ../admin/index.php');

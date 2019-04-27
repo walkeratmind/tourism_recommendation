@@ -7,7 +7,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
 <div class="navBar sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">Logo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -27,7 +28,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
           <form class="form form-inline">
 
             <div class="search-input">
-              <input class="form-control input-lg" id="search-bar" type="search" placeholder="Search" aria-label="Search" id="search-bar">
+              <input class="form-control input-lg" id="search-bar" type="search" placeholder="Search"
+                aria-label="Search" id="search-bar">
             </div>
 
           </form>
@@ -44,16 +46,16 @@ require_once dirname(__FILE__) . './inc/lib.php';
               <?php
               if (!isset($_SESSION['user_id'])) {
 
-                $output = '<form class="login-form px-4 py-3" method="POST" action="./database/user_login.php">
+                $output = '<form class="login-form px-4 py-3 needs-validation" novalidate method="POST" action="./database/user_login.php">
                   <div class="form-group">
                     <!-- <label for="exampleDropdownFormEmail1">Email</label> -->
                     <input type="email" name="email" class="form-control" id="exampleDropdownFormEmail1"
-                      placeholder="email@example.com">
+                      placeholder="email@example.com" required>
                   </div>
                   <div class="form-group">
                     <!-- <label for="exampleDropdownFormPassword1">Password</label> -->
                     <input type="password" name="password" class="form-control" id="exampleDropdownFormPassword1"
-                      placeholder="Password">
+                      placeholder="Password" required>
                   </div>
 
                   <button type="submit" name="login" class="btn btn-primary">Sign in</button>
@@ -71,8 +73,12 @@ require_once dirname(__FILE__) . './inc/lib.php';
 
                 echo '<div class="login-info">
                   <div class="dropdown-item btn btn-primary"
-                  data-toggle="modal" data-target="#userFormModal"  id="name">' . $result['firstName'] . ' ' . $result['lastName'] .'</div>
+                  data-toggle="modal" data-target="#userFormModal"  id="name">' . $result['firstName'] . ' ' . $result['lastName'] . '</div>
                 </div>';
+
+                echo '<div id="feedback" class="dropdown-item btn btn-primary" 
+                  data-toggle="modal" data-target="#feedbackFormModal"> Send Feedback
+                  </div>';
 
                 echo '<div class="dropdown-divider"></div>';
                 $output = '<a href="./user_logout.php?logout=true" class="btn btn-primary logout-btn dropdown-item" 
@@ -111,7 +117,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
         <?php
 
         ?>
-        <form class="profile-form form-horizontal needs-validation" novalidate method="post" action='./database/update_user_profile.php'>
+        <form class="profile-form form-horizontal needs-validation" novalidate method="post"
+          action='./database/update_user_profile.php'>
 
           <div class="form-group">
             <label for="name" class="cols-sm-2 control-label">First Name</label>
@@ -120,7 +127,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" class="form-control" name="firstName" id="first_name" value="<?php echo $result['firstName'] ?>" required />
+                <input type="text" class="form-control" name="firstName" id="first_name"
+                  value="<?php echo $result['firstName'] ?>" required />
               </div>
             </div>
           </div>
@@ -132,7 +140,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-user" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" class="form-control" name="lastName" id="last_name" value="<?php echo $result['lastName'] ?>" required />
+                <input type="text" class="form-control" name="lastName" id="last_name"
+                  value="<?php echo $result['lastName'] ?>" required />
               </div>
             </div>
           </div>
@@ -144,7 +153,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-users" aria-hidden="true"></i></span>
                 </div>
-                <input type="text" class="form-control" name="username" id="username" value="<?php echo $result['firstName'] ?>" required />
+                <input type="text" class="form-control" name="username" id="username"
+                  value="<?php echo $result['firstName'] ?>" required />
               </div>
             </div>
           </div>
@@ -157,7 +167,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
 
                   <span class="input-group-text"><i class="fas fa-envelope" aria-hidden="true"></i></span>
                 </div>
-                <input type="email" class="form-control" name="email" id="email" value="<?php echo $result['email'] ?>" required />
+                <input type="email" class="form-control" name="email" id="email" value="<?php echo $result['email'] ?>"
+                  required />
               </div>
             </div>
           </div>
@@ -171,7 +182,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
                   <span class="input-group-text"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                 </div>
 
-                <input type="password" class="form-control" name="password" id="password" value="<?php echo $result['password'] ?>" required />
+                <input type="password" class="form-control" name="password" id="password"
+                  value="<?php echo $result['password'] ?>" required />
               </div>
             </div>
           </div>
@@ -183,7 +195,8 @@ require_once dirname(__FILE__) . './inc/lib.php';
 
                   <span class="input-group-text"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                 </div>
-                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" required />
+                <input type="password" class="form-control" name="confirm" id="confirm"
+                  placeholder="Confirm your Password" required />
               </div>
             </div>
           </div>
@@ -206,12 +219,49 @@ require_once dirname(__FILE__) . './inc/lib.php';
             <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block submit-btn">Update</button>
           </div>
           <div class="delete-button">
-            <a class="btn btn-danger btn-lg btn-block" onclick="return confirm('Delete?')" href="./database/user_delete.php?id= <?php echo $result['id'] ?>">Delete</a>
+            <a class="btn btn-danger btn-lg btn-block" onclick="return confirm('Delete?')"
+              href="./database/user_delete.php?id= <?php echo $result['id'] ?>">Delete</a>
           </div>
         </form>
 
         <div id="htmlContent"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enquiry and feedback form modal -->
+<div class="modal fade" id="feedbackFormModal" tabindex="-1" role="dialog" aria-labelledby="feedbackTitle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="feedbackTitle">Feedbak</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="profile-form form-horizontal needs-validation" novalidate method="post"
+          action='./database/submit_feedback_form.php'>
+
+          <input type="hidden" class="form-control" name="user_id" value="<?php echo $_SESSION['user_id']?>" required />
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Feedback</label>
+            <div class="cols-sm-10">
+              <textarea type="text" class="form-control" name="feedback" id="feedback" required></textarea>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" name="submit" class="btn btn-primary">Commit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
@@ -232,6 +282,28 @@ require_once dirname(__FILE__) . './inc/lib.php';
 </style>
 
 <script>
+  // FOR FORM VALIDATION
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      //validate all forms
+      // var forms = document.getElementsByTagName('form');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+
+
   console.log('written by me');
 
   var isUser;
@@ -257,7 +329,7 @@ require_once dirname(__FILE__) . './inc/lib.php';
   }
 
 
-  $(document).ready(function() {
+  $(document).ready(function () {
 
     function load_data(query) {
       $.ajax({
@@ -266,18 +338,18 @@ require_once dirname(__FILE__) . './inc/lib.php';
         data: {
           query: query
         }
-      }).done(function(data) {
+      }).done(function (data) {
         console.log(data);
         $('#search-results').html(data);
         // $('#search-results').css('display', 'block');
-      }).fail(function(data) {
+      }).fail(function (data) {
         console.log(data);
         $('#search-results').html(data);
         $('#search-results').css('display', 'none');
       })
     }
 
-    $('#search-bar').keyup(function() {
+    $('#search-bar').keyup(function () {
       var search = $(this).val();
       if (search != '') {
         load_data(search);
@@ -290,7 +362,7 @@ require_once dirname(__FILE__) . './inc/lib.php';
     //for user profile view and edit
     showProfile();
 
-    $profileForm.find('.edit-button').click(function() {
+    $profileForm.find('.edit-button').click(function () {
       editProfile();
     })
 
@@ -299,5 +371,6 @@ require_once dirname(__FILE__) . './inc/lib.php';
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+  integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
 </script>

@@ -81,10 +81,8 @@ class dboperation
         return $statement->num_rows > 0;
     }
 
-    function login($email, $password, $tableName)
+    function login($tableName, $email, $password)
     {
-
-
         if ($this->isEmailExist($tableName, $email)) {
             $query = "SELECT id from " . $tableName . " WHERE email=? AND password=?";
 
@@ -129,6 +127,7 @@ class dboperation
         return json_encode($result);
     }
 
+
     // for RETRIEVING all element from a table
     function getAll($tableName)
     {
@@ -146,6 +145,26 @@ class dboperation
         return json_encode($result);
     }
 
+    // for RETRIEVING limited values from a table
+    function getLimitedData($tableName, $limit)
+    {
+        $query = "SELECT * FROM " . $tableName . " ORDER BY id DESC LIMIT " . $limit;
+        $mysqli = $this->getConn();
+        // $statement = $this->conn-> prepare($query);
+
+        // $statement->execute();
+
+        if ($data = $mysqli->query($query)) {
+            $result = array();
+            while ($row = $data->fetch_assoc()) {
+                $result[] = $row;
+            }
+
+            return json_encode($result);
+        }
+        return;
+    }
+
     function getDestination($id)
     {
 
@@ -158,6 +177,18 @@ class dboperation
         $result = $statement->get_result()->fetch_assoc();
 
         return json_encode($result);
+    }
+
+    function getTotalCount($tableName) {
+        $query = "SELECT COUNT(id) as total From " . $tableName . ";";
+
+        $statement = $this->conn->prepare($query);
+
+        $statement->execute();
+        $result = $statement->get_result()->fetch_assoc();
+        $total = $result['total'];
+        return $total;
+
     }
 
     // UPDATE PART

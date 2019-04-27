@@ -144,7 +144,8 @@ if ($stmt->execute()) {
 
 
 	<?php
-	require_once './destination.php';
+	// require_once './destination.php';
+	require_once './index_suggestion.php';
 
 	require_once dirname(__FILE__) . './footer.php';
 	?>

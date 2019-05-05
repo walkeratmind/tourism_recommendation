@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__FILE__) . './database/dbconnect.php';
+require_once dirname(__FILE__) . './database/dboperation.php';
 require  dirname(__FILE__) . './header.php';
 
 require_once dirname(__FILE__) . './inc/utils.php';
@@ -38,6 +39,12 @@ require_once dirname(__FILE__) . './inc/utils.php';
 </style>
 
 <?php
+
+$db = new dboperation();
+$destinationTable = "destination";
+
+$result = $db->getAll($destinationTable);
+$destinations = json_decode($result, true);
 
 $mysqli = $database->connect();
 

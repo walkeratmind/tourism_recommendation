@@ -41,7 +41,7 @@ require_once dirname(__FILE__) . './inc/lib.php';
         <li class="nav-item">
           <div class="btn-group nav-link" style="cursor: pointer; padding:4px">
             <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-user"></i><span id="username"> user</span>
+              <i class="fas fa-user"></i><span id="username"> Login</span>
             </div>
             <div class="dropdown-menu dropdown-menu-right">
               <h5 class="dropdown-header text-center">Account</h5>

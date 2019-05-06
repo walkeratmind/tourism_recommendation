@@ -168,7 +168,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" name='description' id="description">
+                        <textarea class="form-control" name='description' id="summernote"></textarea>
 
                         <!-- <div id="editor" class="editor-container">
                         </div> -->
@@ -256,6 +256,8 @@ require_once dirname(__FILE__) . './show_top_details.php';
 <script>
     // for content overlay for option menu
     $(document).ready(function() {
+
+        $('#summernote').summernote();
 
 
         // $.ajax({

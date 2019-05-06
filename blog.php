@@ -36,7 +36,7 @@ require_once dirname(__FILE__) . './inc/utils.php';
 				<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>"/>
 		
 				<div class="form-group">
-					<textarea rows="5" class="form-control" name="post" placeholder="write post here..." required></textarea>
+					<textarea rows="5" class="form-control" style="resize:none;" name="post" placeholder="write post here..." required></textarea>
 				</div>
 				
 		

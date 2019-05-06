@@ -2,6 +2,12 @@
 require_once dirname(__FILE__) . './database/dboperation.php';
 
 require_once dirname(__FILE__) . './inc/lib.php';
+
+ if (isset($_SESSION['user_id'])) {
+  $db  = new dboperation();
+  // $id = $_SESSION['user']
+  $result = json_decode($db->getSingleData('user', $_SESSION['user_id']), true);
+ }
 ?>
 
 <div class="navBar sticky-top">
@@ -41,7 +47,7 @@ require_once dirname(__FILE__) . './inc/lib.php';
         <li class="nav-item">
           <div class="btn-group nav-link" style="cursor: pointer; padding:4px">
             <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-user"></i><span id="username"> Login</span>
+              <i class="fas fa-user mr-2"></i><span id="username"><?php if(isset($_SESSION['user_id'])) { echo $result['username'];} else echo 'Login';?></span>
             </div>
             <div class="dropdown-menu dropdown-menu-right">
               <h5 class="dropdown-header text-center">Account</h5>
@@ -70,9 +76,7 @@ require_once dirname(__FILE__) . './inc/lib.php';
                   <a class="dropdown-item" href="./user_register.php">New around here? Sign up</a>';
               } else {
 
-                $db  = new dboperation();
-                // $id = $_SESSION['user']
-                $result = json_decode($db->getSingleData('user', $_SESSION['user_id']), true);
+                
 
                 echo '<div class="login-info">
                   <div class="dropdown-item btn btn-primary"

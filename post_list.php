@@ -29,7 +29,7 @@ while ($row = $data->fetch_assoc()) {
     $posts[] = $row;
 }
 
-$totalPost = sizeof($posts);
+$totalPost = empty($posts) ? 0 : sizeof($posts);
 
 // $statement->close();
 $mysqli->close();
@@ -53,30 +53,30 @@ utils::toastMessage();
 
     <?php
 
-    foreach ($posts as $post) {
-        echo '<div class="row blog-post col">';
-        echo "<a href='#'>";
+    if ($totalPost > 0) :
+        foreach ($posts as $post) {
+            echo '<div class="row blog-post col">';
+            echo "<a href='#'>";
 
-        // $user = $db->getSingleData('user', $post['user_id']);
-        // $user = json_decode($user, true);
-        // echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
-        // echo '<h5>'. $user['username']. '</h5>';
+            // $user = $db->getSingleData('user', $post['user_id']);
+            // $user = json_decode($user, true);
+            // echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
+            // echo '<h5>'. $user['username']. '</h5>';
 
-        echo "<p>" . $post['post'] . "</p>";
+            echo "<p>" . $post['post'] . "</p>";
 
-        echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
-        echo "</a>";
+            echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
+            echo "</a>";
 
-        echo '<a class="btn btn-danger" href="./database/delete_post.php?id=' . $post['id'] . '"
-                onclick="return confirm(\'Delete Post?\');">Delete</a>';
+            echo '<a class="btn btn-danger" href="./database/delete_post.php?id=' . $post['id'] . '"
+                    onclick="return confirm(\'Delete Post?\');">Delete</a>';
 
-        echo '</div>';
-    }
-
-
-    ?>
-
-
+            echo '</div>';
+        } 
+        else :
+        ?>
+        <a href="blog.php">Click Here to Post...</a>
+    <?php endif ?>
 </div>
 
 <style>

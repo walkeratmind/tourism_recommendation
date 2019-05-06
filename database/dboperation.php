@@ -293,4 +293,25 @@ class dboperation
             return false;
         }
     }
+
+    // FOR DESTINATION reviews and COMMENTS
+    function getDestinationReviews($destination_id)
+    {
+        $query = "SELECT * FROM destination_review WHERE destination_id_fk= $destination_id";
+
+        $resultSet = mysqli_query($this->conn, $query);
+        // $result = mysqli_fetch_array($resultSet);
+
+        $result = array();
+        while ($row = $resultSet->fetch_assoc()) {
+            $result[] = $row;
+        }
+        //     $query = "SELECT * FROM destination_review WHERE destination_id_fk=?";
+        //     $statement = $this->conn->prepare($query);
+        //     $statement->bind_param('i', $destination_id);
+        //     $statement->execute();
+        //    $result =  $statement->get_result()->fetch_assoc();
+
+        return json_encode($result);
+    }
 }

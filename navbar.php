@@ -10,9 +10,19 @@ require_once dirname(__FILE__) . './inc/lib.php';
  }
 ?>
 
+<!-- FOR LOGO icon -->
+<style>
+  .img-logo {
+		display: block;
+		max-width: 100%;
+		width: 8rem;
+		height: 2rem;
+	}
+</style>
+
 <div class="navBar sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="index.php">Logo</a>
+    <a class="navbar-brand" href="index.php"><img class="img-logo" src="assets/icons/website_icon.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -83,24 +93,28 @@ require_once dirname(__FILE__) . './inc/lib.php';
                   data-toggle="modal" data-target="#userFormModal"  id="name">' . $result['firstName'] . ' ' . $result['lastName'] . '</div>
                 </div>';
 
-                echo '<div id="feedback" class="dropdown-item btn btn-primary" 
-                  data-toggle="modal" data-target="#feedbackFormModal"> Send Feedback
-                  </div>';
+                  // FOR Posts
+                  echo '<div class="dropdown-divider"></div>';
 
-                  echo '<div id="post_list" class="dropdown-item btn btn-primary"> 
-                    <a href="post_list.php" >My Posts</a>
+                  echo '<div id="post_list" class="dropdown-item btn btn-primary posts"> 
+                    <a href="post_list.php" >Posts</a>
                   </div>';
 
                 echo '<div class="dropdown-divider"></div>';
+
+                echo '<div id="feedback" class="dropdown-item btn btn-primary" 
+                data-toggle="modal" data-target="#feedbackFormModal"> Send Feedback
+                </div>';
+
                 $output = '<a href="./user_logout.php?logout=true" class="btn btn-primary logout-btn dropdown-item" 
                   onclick="return confirm(\'Logout?\');">Logout</a>';
                 echo $output;
               }
               ?>
               <style>
-                #post_list a{
+                .posts a{
                   text-decoration: none;
-                  color: darkgray;
+                  color: gray;
                 }
               </style>
             </div>

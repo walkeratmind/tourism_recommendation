@@ -51,6 +51,9 @@ utils::toastMessage();
 
 <div class="container mt-4">
 
+    <button class="btn btn-lg btn-primary  my-2 " data-toggle="modal" data-target="#createPostModal"><i class="fa fa-plus-square"></i> Create Post</button>
+
+
     <?php
 
     if ($totalPost > 0) :
@@ -68,25 +71,60 @@ utils::toastMessage();
             echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
             echo "</a>";
 
-            echo '<a class="btn btn-danger" href="./database/delete_post.php?id=' . $post['id'] . '"
+            echo '<a class="btn btn-danger" id="delete-btn" href="./database/delete_post.php?id=' . $post['id'] . '"
                     onclick="return confirm(\'Delete Post?\');">Delete</a>';
 
             echo '</div>';
-        } 
-        else :
+        } else :
         ?>
-        <a href="blog.php">Click Here to Post...</a>
+
+        <div class="alert alert-info">
+            <h5>No Any Posts...</h5>
+        </div>
     <?php endif ?>
+</div>
+
+
+<!-- Enquiry and feedback form modal -->
+<div class="modal fade" id="createPostModal" tabindex="-1" role="dialog" aria-labelledby="createPostTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createPostTitle">Create Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form class="post-form needs-validation" novalidate action="./database/add_blog_post.php" method="POST">
+
+                    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>" />
+
+                    <div class="form-group">
+                        <textarea rows="5" class="form-control" style="resize:none;" name="post" placeholder="write post here..." required></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="btn btn-primary btn-lg ">Post</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <style>
     .blog-post {
         display: block;
         border: 1px solid #ccc;
-        ;
         border-radius: 8px;
         margin: 8px;
-        padding: 8px;
+        padding: 16px;
         width: 56rem;
         align-content: center;
         text-decoration: none;
@@ -94,7 +132,12 @@ utils::toastMessage();
 
     .blog-post a {
         text-decoration: none;
-        color: gray;
+        color: #808080;
+    }
+
+    .blog-post .btn {
+        float: right;
+        color: #FFF;
     }
 
     .blog-post p {
@@ -107,7 +150,25 @@ utils::toastMessage();
     }
 </style>
 
-
 <script>
     //for form validation
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            //validate all forms
+            // var forms = document.getElementsByTagName('form');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

@@ -173,7 +173,6 @@ require_once dirname(__FILE__) . './show_top_details.php';
                         <!-- <div id="editor" class="editor-container">
                         </div> -->
 
-
                     </div>
 
                     <div class="form-group">

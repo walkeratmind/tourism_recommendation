@@ -157,6 +157,9 @@ utils::toastMessage();
     </div>
 </div>
 
+    <!-- Show Footer -->
+    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>
+
 <style>
     .image-fluid {
         display: grid;

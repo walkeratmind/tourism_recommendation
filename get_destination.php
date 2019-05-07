@@ -145,6 +145,9 @@ echo '<div><img src="' . $img_path . $destination['image'] . '" class="image-con
 
     </div>
 
+    <!-- Show Footer -->
+    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>
+
     <!-- FOR reviews styles only -->
     <style>
         /* draw bar for separating reviews */

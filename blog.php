@@ -64,6 +64,9 @@ $totalPost = empty($posts) ? 0 : sizeof($posts);
 
 </div>
 
+    <!-- Show Footer -->
+    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>
+
 <style>
 	.image-fluid {
 		display: block;

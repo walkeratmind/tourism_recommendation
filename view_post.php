@@ -78,3 +78,6 @@
         <div class=" text-muted" >Posted On: <?php  echo $post['datetime']?></div>
     </div>
 </div>
+
+    <!-- Show Footer -->
+    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>

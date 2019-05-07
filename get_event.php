@@ -62,3 +62,6 @@
         <div class=" text-muted" >Event Date: <?php  echo $event['date']?></div>
     </div>
 </div>
+
+    <!-- Show Footer -->
+    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>

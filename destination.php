@@ -64,7 +64,8 @@ $database = new dbconnect();
 </div>
 </div>
 
-<?php require_once dirname(__FILE__) . './footer.php'; ?>
+    <!-- Show Footer -->
+    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>
 
 
 <style>

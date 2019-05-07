@@ -398,6 +398,14 @@ require_once dirname(__FILE__) . './inc/lib.php';
 
   });
   console.log("is User: ", isUser);
+
+  function shwoSnackBar(message) {
+            Snackbar.show({
+                text: message,
+                pos:'bottom-center',
+                duration: '3000'
+            });
+        }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

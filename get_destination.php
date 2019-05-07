@@ -138,229 +138,215 @@ echo '<div><img src="' . $img_path . $destination['image'] . '" class="image-con
 
         <?php endif ?>
 
-    <!-- SHOW reviews and comments here -->
-    <?php
-    $result = $db->getDestinationReviews($destination['id']);
-    $reviews = json_decode($result, true);
+        <div id="review_section">
 
-    // echo '<script> console.log("Reviews: ' . $reviews . '")</script>';
-
-    echo '<h5>Reviews</h5>';
-    if (!empty($reviews)) :
-        foreach ($reviews as $review) {
-            echo '<div class="row comment-section col">';
-
-            $user = $db->getSingleData('user', $review['user_id_fk']);
-            $user = json_decode($user, true);
-            // echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
-            echo '<h6 id="title">' . $user['username'] . '</h6>';
-
-            echo "<p>" . $review['review'] . "</p>";
-
-            echo "<span id='date'><small>" . $review['datetime'] . "</small></span>";
-
-            echo '</div>';
-            // echo "<div class='bar col-md-2 text-center'></div>";
-        }
-        ?>
-
-    <?php else : ?>
-        <div class="alert alert-info">
-            <h5>No Any Reviews...</h5>
         </div>
-    <?php endif ?>
-</div>
+        <!-- SHOW reviews and comments here -->
 
-<!-- FOR reviews styles only -->
-<style>
-    /* .container {
-        position: relative;
-    }
+    </div>
 
-    .comment_box {
-        position: sticky;
-        top: 80px;
-        padding: 10px;
-        background: #fff;
-    } */
-
-    /* draw bar for separating reviews */
-    .bar {
-        border-bottom: 2px solid rgba(0, 0, 0, 0.7);
-        border-radius: 4px
-    }
-
-    .comment-section {
-        display: block;
-        /* border: 1px solid #ccc; */
-        ;
-        border-radius: 8px;
-        margin: 8px;
-        padding: 8px;
-        width: 56rem;
-        align-content: center;
-        text-decoration: none;
-    }
-
-    .comment-section a {
-        text-decoration: none;
-        color: gray;
-    }
-
-    .comment-section p {
-        font-size: 14px;
-        text-decoration: none;
-        align-content: center;
-    }
-
-    .comment-section #date {
-        text-align: right;
-        align-content: right;
-    }
-</style>
-
-<script>
-
-    $(document).ready(function() {
-
-        // var destination_id = $(this).data('id');
-        var user_id = $('#user_id').val();
-        var destination_id = $('#destination_id').val();
-        // console.log("destination_id: " + destination_id);
-
-        // get reviews in AJAX
-        function get_reviews(destination_id) {
-            $.ajax({
-                url: './database/review/get_reviews.php',
-                type:'POST',
-                data: {
-                    'destination_id' : destination_id
-                }
-            }).done(function(data) {
-
-            }).fail(function(data) {
-
-            });
+    <!-- FOR reviews styles only -->
+    <style>
+        /* draw bar for separating reviews */
+        .bar {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+            border-radius: 4px
         }
-        // For Review Posts and fetching reviews
-        $('#review-form').submit(function(event) {
-            // get form data
-            var formData = {
-                'user_id': user_id,
-                'destination_id': destination_id,
-                'review': $('textarea[name=review]').val()
-            };
 
-            // process form in ajax
-            $.ajax({
-                    url: './database/review/post_review.php',
+        .comment-section {
+            display: block;
+            /* border: 1px solid #ccc; */
+            ;
+            border-radius: 8px;
+            margin: 8px;
+            padding: 8px;
+            width: 56rem;
+            align-content: center;
+            text-decoration: none;
+        }
+
+        .comment-section a {
+            text-decoration: none;
+            color: gray;
+        }
+
+        .comment-section p {
+            font-size: 14px;
+            text-decoration: none;
+            align-content: center;
+        }
+
+        .comment-section #date {
+            text-align: right;
+            align-content: right;
+        }
+    </style>
+
+    <script>
+
+        
+        $(document).ready(function() {
+
+            // var destination_id = $(this).data('id');
+            var user_id = $('#user_id').val();
+            var destination_id = $('#destination_id').val();
+
+            $(window).on('load', function() {
+                getReviews(destination_id);
+            });
+            // console.log("destination_id: " + destination_id);
+
+            // get reviews in AJAX
+            function getReviews(destination_id) {
+                $.ajax({
+                    url: './database/review/get_reviews.php',
+                    type: 'POST',
+                    data: {
+                        'destination_id': destination_id
+                    }
+                }).done(function(data) {
+                    $('#review_section').html(data);
+                }).fail(function(data) {
+                    $('#review_section').html(data);
+                });
+            }
+
+            function getLastReview(destination_id) {
+                $.ajax({
+                    url: './database/review/get_reviews.php',
+                    type: 'POST',
+                    data: {
+                        'destination_id': destination_id
+                    }
+                }).done(function(data) {
+                    shwoSnackBar("Review Added");
+                    $('#review_section').html(data);
+                }).fail(function(data) {
+                    shwoSnackBar("Fail to Add Review, Try Again");
+                });
+            }
+            // For Review Posts and fetching reviews
+            $('#review-form').submit(function(event) {
+                // get form data
+                var formData = {
+                    'user_id': user_id,
+                    'destination_id': destination_id,
+                    'review': $('textarea[name=review]').val()
+                };
+
+                // process form in ajax
+                $.ajax({
+                        url: './database/review/post_review.php',
+                        type: 'post',
+                        data: formData,
+                        dataType: 'JSON',
+                        encode: true
+                    })
+                    // use done promise callback
+                    .done(function(data) {
+
+                        // res = JSON.parse(data)
+                        console.log("onSuccess" + JSON.stringify(data));
+
+                        // load the reviews
+                        getLastReview(destination_id);
+                    })
+                    .fail(function(data) {
+                        console.log("onFailure" + data);
+                    });
+
+                // stop the form from submitting the normal way and refreshing the page
+                event.preventDefault();
+            });
+
+            // For likes And Dislike
+            $('.like-btn').on('click', function() {
+                $clicked_btn = $(this);
+
+                if ($clicked_btn.hasClass('far')) {
+                    action = 'like';
+                } else if ($clicked_btn.hasClass('fas')) {
+                    action = 'unlike';
+                }
+
+                $.ajax({
+                    // url: 'get_destination.php ',
+                    url: './database/rating/post_rating.php',
                     type: 'post',
-                    data: formData,
-                    dataType: 'JSON',
-                    encode: true
-                })
-                // use done promise callback
-                .done(function(data) {
+                    data: {
+                        'action': action,
+                        'destination_id': destination_id,
+                        'user_id': user_id
+                    }
+                }).done(function(data) {
+                    console.log("Data: " + data);
+                    var res = JSON.parse(data);
+                    if (action == "like") {
+                        $clicked_btn.removeClass('far');
+                        $clicked_btn.addClass('fas');
+                    } else if (action == "unlike") {
+                        $clicked_btn.removeClass('fas');
+                        $clicked_btn.addClass('far');
+                    }
+                    // display the number of likes and dislikes
+                    $clicked_btn.siblings('span.likes').text(res.likes);
+                    $clicked_btn.siblings('span.dislikes').text(res.dislikes);
 
-                    // res = JSON.parse(data)
-                    console.log("onSuccess" + JSON.stringify(data));
-                })
-                .fail(function(data) {
-                    console.log("onFailure" + data);
+                    // change button styling of the other button if user is reacting the second time to post
+                    if ($('.dislike-btn').hasClass('fas')) {
+                        $('.dislike-btn').removeClass('fas').addClass('far');
+                    }
+                    // $clicked_btn.siblings('i.fas fa-thumbs-down').removeClass('fas fa-thumbs-down').addClass(
+                    //     'far ');
+                }).fail(function(data) {
+                    console.log("Fail to send like value from AJAX");
                 });
 
-            // stop the form from submitting the normal way and refreshing the page
-            event.preventDefault();
-        });
-
-        // For likes And Dislike
-        $('.like-btn').on('click', function() {
-            $clicked_btn = $(this);
-
-            if ($clicked_btn.hasClass('far')) {
-                action = 'like';
-            } else if ($clicked_btn.hasClass('fas')) {
-                action = 'unlike';
-            }
-
-            $.ajax({
-                // url: 'get_destination.php ',
-                url: './database/rating/post_rating.php',
-                type: 'post',
-                data: {
-                    'action': action,
-                    'destination_id': destination_id,
-                    'user_id': user_id
-                }
-            }).done(function(data) {
-                console.log("Data: " + data);
-                var res = JSON.parse(data);
-                if (action == "like") {
-                    $clicked_btn.removeClass('far');
-                    $clicked_btn.addClass('fas');
-                } else if (action == "unlike") {
-                    $clicked_btn.removeClass('fas');
-                    $clicked_btn.addClass('far');
-                }
-                // display the number of likes and dislikes
-                $clicked_btn.siblings('span.likes').text(res.likes);
-                $clicked_btn.siblings('span.dislikes').text(res.dislikes);
-
-                // change button styling of the other button if user is reacting the second time to post
-                if ($('.dislike-btn').hasClass('fas')) {
-                    $('.dislike-btn').removeClass('fas').addClass('far');
-                }
-                // $clicked_btn.siblings('i.fas fa-thumbs-down').removeClass('fas fa-thumbs-down').addClass(
-                //     'far ');
-            }).fail(function(data) {
-                console.log("Fail to send like value from AJAX");
             });
 
-        });
+            // FOR Dislike button
+            $('.dislike-btn').on('click', function() {
+                $clicked_btn = $(this);
 
-        // FOR Dislike button
-        $('.dislike-btn').on('click', function() {
-            $clicked_btn = $(this);
-
-            if ($clicked_btn.hasClass('far')) {
-                action = 'dislike';
-            } else if ($clicked_btn.hasClass('fas')) {
-                action = 'undislike';
-            }
-
-            $.ajax({
-                // url: 'get_destination.php ',
-                url: './database/rating/post_rating.php',
-                type: 'post',
-                data: {
-                    'action': action,
-                    'destination_id': destination_id,
-                    'user_id': user_id
-                }
-            }).done(function(data) {
-                console.log("Data: " + data);
-                var res = JSON.parse(data);
-                console.log("onSuccess: ");
-                if (action == "dislike") {
-                    $clicked_btn.removeClass('far');
-                    $clicked_btn.addClass('fas');
-                } else if (action == "undislike") {
-                    $clicked_btn.removeClass('fas');
-                    $clicked_btn.addClass('far');
-                }
-                // display the number of likes and dislikes
-                $clicked_btn.siblings('span.likes').text(res.likes);
-                $clicked_btn.siblings('span.dislikes').text(res.dislikes);
-
-                // change button styling of the other button if user is reacting the second time to post
-                if ($('.like-btn').hasClass('fas')) {
-                    $('.like-btn').removeClass('fas').addClass('far');
+                if ($clicked_btn.hasClass('far')) {
+                    action = 'dislike';
+                } else if ($clicked_btn.hasClass('fas')) {
+                    action = 'undislike';
                 }
 
-            }).fail(function(data) {
-                console.log("Fail to send dislike value from AJAX");
+                $.ajax({
+                    // url: 'get_destination.php ',
+                    url: './database/rating/post_rating.php',
+                    type: 'post',
+                    data: {
+                        'action': action,
+                        'destination_id': destination_id,
+                        'user_id': user_id
+                    }
+                }).done(function(data) {
+                    console.log("Data: " + data);
+                    var res = JSON.parse(data);
+                    console.log("onSuccess: ");
+                    if (action == "dislike") {
+                        $clicked_btn.removeClass('far');
+                        $clicked_btn.addClass('fas');
+                    } else if (action == "undislike") {
+                        $clicked_btn.removeClass('fas');
+                        $clicked_btn.addClass('far');
+                    }
+                    // display the number of likes and dislikes
+                    $clicked_btn.siblings('span.likes').text(res.likes);
+                    $clicked_btn.siblings('span.dislikes').text(res.dislikes);
+
+                    // change button styling of the other button if user is reacting the second time to post
+                    if ($('.like-btn').hasClass('fas')) {
+                        $('.like-btn').removeClass('fas').addClass('far');
+                    }
+
+                }).fail(function(data) {
+                    console.log("Fail to send dislike value from AJAX");
+                });
+
             });
-
         });
-    });
-</script>
+    </script>

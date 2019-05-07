@@ -26,12 +26,11 @@ if (!empty($errors)) {
     // inserting into database
 
     $db = new dboperation();
-    $result = $db->getDestinationReviews($_POST['destination_id']);
+    $result = $db->getLastAddedDestination($_POST['destination_id']);
     $reviews = json_decode($result, true);
 
     // echo '<script> console.log("Reviews: ' . $reviews . '")</script>';
 
-    echo '<h5>Reviews</h5>';
     if (!empty($reviews)) {
 
         foreach ($reviews as $review) {
@@ -50,9 +49,7 @@ if (!empty($errors)) {
             // echo "<div class='bar col-md-2 text-center'></div>";
         }
     } else {
-        echo '<div class="alert alert-info">
-            <h5>No Any Reviews...</h5>
-        </div>';
+        
     }
 }
 

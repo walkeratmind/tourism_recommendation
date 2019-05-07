@@ -15,17 +15,6 @@ $posts = json_decode($result, true);
 // Set total post to 0 if posts is empty
 $totalPost = empty($posts) ? 0 : sizeof($posts);
 
-// utils::toastClientSide();
-
-if ($totalPost == 0) {
-	utils::alertMessage("No Any Posts...", "warning");
-}
-// utils::checkUserLogin();
-// $_SESSION['message'] = 'hello';
-utils::toastMessage();
-// utils::message();
-
-
 ?>
 
 <div class="container mt-4">
@@ -33,24 +22,42 @@ utils::toastMessage();
 	<?php
 	if ($totalPost > 0) :
 		foreach ($posts as $post) {
-			echo '<div class="row blog-post col">';
-			echo "<a href='#'>";
+			echo '<div class="row blog-post ">';
 
-			$user = $db->getSingleData('user', $post['user_id']);
-			$user = json_decode($user, true);
-			// echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
-			echo '<h5>' . $user['username'] . '</h5>';
+				echo '<a href="view_post.php?id=' . $post['id'] . '">';
 
-			echo "<p>" . $post['post'] . "</p>";
+					$user = $db->getSingleData('user', $post['user_id']);
+					$user = json_decode($user, true);
+					// echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
+					echo '<h5>' . $user['username'] . '</h5>';
 
-			echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
-			echo "</a>";
+					echo "<div class='col-sm-2' >";
+						if (empty($post['image'])) {
+							$showImage = "<img class='image-fluid' src='./assets/icons/no_image.png' alt='No Image'>";
+						} else {
+							$img_path = "./imageUploads/blog_image/";
+							$showImage = "<img class='image-fluid' src='" . $img_path . $post['image'] . "' alt=''>";
+						}
+
+						echo $showImage;
+
+					echo "</div>";
+
+					echo "<div class='col-sm-10'>";
+
+						echo "<h5 id='title'>" . $post['title'] . "</h5>";
+						echo "<p class=''>" . utils::getDefinateString($post['post'], 100) . "</p>";
+
+						echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
+
+					echo '</div>';
+				echo "</a>";
 
 			echo '</div>';
 		} else :
 		?>
 		<div class="alert alert-info">
-			<h5>No Any Reviews...</h5>
+			<h5>No Any Posts...</h5>
 		</div>
 
 	<?php endif ?>
@@ -58,10 +65,16 @@ utils::toastMessage();
 </div>
 
 <style>
-	.blog-post {
+	.image-fluid {
 		display: block;
+		max-width: 100%;
+		width: 12rem;
+		height: 8rem;
+	}
+
+	.blog-post {
+		display: grid;
 		border: 1px solid #ccc;
-		;
 		border-radius: 8px;
 		margin: 8px;
 		padding: 8px;
@@ -77,11 +90,6 @@ utils::toastMessage();
 
 	.blog-post p {
 		text-decoration: none;
-	}
-
-	.blog-post #date {
-		text-align: right;
-		align-content: right;
 	}
 </style>
 

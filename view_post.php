@@ -11,11 +11,11 @@
 
             echo '<script> console.log("Clicked: '. $id .'")</script>';
 
-            $tableName = 'event';
+            $tableName = 'user_post';
             $result = $db->getSingleData($tableName ,$id);
             echo '<script> console.log("Result: '. $result .'")</script>';
 
-            $event =  json_decode($result, true);
+            $post =  json_decode($result, true);
             // echo implode(",", $obj);
 
         }
@@ -24,7 +24,7 @@
         $_SESSION['msg_type'] = 'danger';
         $_SESSION['message'] = "Invalid request";
 
-        header('location:./index.php');
+        header('location:./blog.php');
     }
 ?>
 
@@ -43,22 +43,38 @@
         width: 100%;
 	}
 
-    #description {
-        font-size:24px;
+    #post {
+        display: block;
+        justify-content: center;
+        width: 44rem;
+        align-content: center;
     }
 </style>
+
     <?php
-         $img_path = './imageUploads/';
-         echo '<div><img src="' . $img_path . $event['image'] . '" class="image-container" alt="image">' . '</div>';
+        if (!empty($post['image']))
+        {
+            $img_path = './imageUploads/blog_image/';
+            echo '<div><img src="' . $img_path . $post['image'] . '" class="image-container" alt="image">' . '</div>';
+        }
     ?>
 <div class="container">
-    <div id="title">
-        <h4><?php echo $event['eventName']; ?></h4>
-    </div>
-    <span id="location" class=""><?php echo $event['location']; ?></span>
-    <div id="event" class="mt-5">
-        <p><?php echo $event['description']; ?></p>
 
-        <div class=" text-muted" >Event Date: <?php  echo $event['date']?></div>
+    <?php 
+        $user = $db->getSingleData('user', $post['user_id']);
+        $user = json_decode($user, true);
+    ?>
+
+    <div id="user_name">
+        <h5>Posted By:</h5>
+        <h5><?php echo $user['username'] ?></h5>
+    </div>
+    <div id="post_title">
+        <h4><?php echo $post['title']; ?></h4>
+    </div>
+    <div id="post" class="mt-5">
+        <p><?php echo $post['post']; ?></p>
+
+        <div class=" text-muted" >Posted On: <?php  echo $post['datetime']?></div>
     </div>
 </div>

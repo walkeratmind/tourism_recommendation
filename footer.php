@@ -65,10 +65,6 @@
 </div>
 
 </footer>
-
-<script>
-    
-</script>
 </html>
 <?php
 

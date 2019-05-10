@@ -49,8 +49,8 @@
 <div class="footer-right">
 
     <p class="footer-company-about">
-        <span>About the company</span>
-        Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        <span>About the Project</span>
+        This Project is done by Mausham Adhikari
     </p>
 
     <div class="footer-icons">

@@ -159,17 +159,17 @@ $totalFeedbacks = empty($feedbacks) ? 0 : sizeof($feedbacks);
               </a>
               <ul class="dropdown-menu">
 
-                <h4><?php echo $admin['firstName'] . ' ' . $admin['lastName']; ?></h4>
-                <h5><?php echo $admin['email']; ?></h5>
-                <h5><?php echo $admin['gender']; ?></h5>
+                <h4 class="text-center"><?php echo $admin['firstName'] . ' ' . $admin['lastName']; ?></h4>
+                <h5 class="text-center"><?php echo $admin['email']; ?></h5>
+                <h5 class="text-center"><?php echo $admin['gender']; ?></h5>
 
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <a href="#" class="btn btn-primary btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="./admin_logout.php?logout=true" onclick="return confirm('Logout?');" name="logout" class="btn btn-default btn-flat">Log out</a>
+                    <a href="./admin_logout.php?logout=true" onclick="return confirm('Logout?');" name="logout" class="btn btn-danger btn-flat">Log out</a>
                   </div>
                 </li>
               </ul>
@@ -209,8 +209,6 @@ $totalFeedbacks = empty($feedbacks) ? 0 : sizeof($feedbacks);
             <a href="add_event.php"><i class="fa fa-calendar"></i> <span>Events</span></a>
           </li>
 
-
-
           <li class="">
             <a href="view_feedback.php">
               <i class="fa fa-files-o"></i>
@@ -221,36 +219,36 @@ $totalFeedbacks = empty($feedbacks) ? 0 : sizeof($feedbacks);
             </a>
           </li>
 
-          <?php if ($admin['role'] == 'superAdmin'): ?>
-          <li class="active treeview menu-open">
-            <a href="#">
-              <i class="fa fa-user-circle-o"></i> <span>Admins</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li class="">
-                <a href="#" data-toggle="modal" data-target="#adminListModal">
-                  <i class="fa fa-user"></i>
-                  <span>Admins</span>
-                  <span class="pull-right-container">
-                    <span class="label label-primary pull-right"><?php echo $totalAdmins ?></span>
-                  </span>
-                </a>
-              </li>
+          <?php if ($admin['role'] == 'superAdmin') : ?>
+            <li class="active treeview menu-open">
+              <a href="#">
+                <i class="fa fa-user-circle-o"></i> <span>Admins</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="">
+                  <a href="#" data-toggle="modal" data-target="#adminListModal">
+                    <i class="fa fa-user"></i>
+                    <span>Admins</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"><?php echo $totalAdmins ?></span>
+                    </span>
+                  </a>
+                </li>
 
-              <li class="">
-                <a href="#" data-target="#adminRequestModal" data-toggle="modal">
-                  <i class="fa fa-user-plus"></i>
-                  <span>Admin Requests</span>
-                  <span class="pull-right-container">
-                    <span class="label label-primary pull-right"><?php echo $totalAdminRequest ?></span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </li>
+                <li class="">
+                  <a href="#" data-target="#adminRequestModal" data-toggle="modal">
+                    <i class="fa fa-user-plus"></i>
+                    <span>Admin Requests</span>
+                    <span class="pull-right-container">
+                      <span class="label label-primary pull-right"><?php echo $totalAdminRequest ?></span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </li>
           <?php endif; ?>
         </ul>
       </section>
@@ -262,108 +260,118 @@ $totalFeedbacks = empty($feedbacks) ? 0 : sizeof($feedbacks);
       <div class="modal-dialog " role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="adminRequestTitle">Admin Requests</h5>
+            <h3 class="modal-title text-center" id="adminRequestTitle">Admin Requests</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <?php
-            foreach ($adminRequests as $adminRequest) {
+            if ($totalAdminRequest == 0) :
+              echo '<div class="alert alert-danger text-center"><h4>No Any Requests</h4></div>';
+            else :
+              foreach ($adminRequests as $adminRequest) {
 
-              echo '<div class= "row">';
+                echo '<div class= "row">';
 
 
-              echo '<div class= "col-sm-10">';
-              // echo '<h6>id: ' . $adminRequest['id'] . '</h6>';
-              echo '<h5> Name: ' . $adminRequest['firstName'] . ' ' . $adminRequest['lastName'] . '</h5>';
-              echo '<h5>User Name: ' . $adminRequest['username'] . '</h5>';
-              echo '<h5>Email: ' . $adminRequest['email'] . '</h5>';
-              //  for col
-              echo '</div>';
+                echo '<div class= "col-sm-10">';
+                // echo '<h6>id: ' . $adminRequest['id'] . '</h6>';
+                echo '<h5> Name: ' . $adminRequest['firstName'] . ' ' . $adminRequest['lastName'] . '</h5>';
+                echo '<h5>User Name: ' . $adminRequest['username'] . '</h5>';
+                echo '<h5>Email: ' . $adminRequest['email'] . '</h5>';
+                //  for col
+                echo '</div>';
 
-              echo '<div class= "col-sm-2">';
-              echo '<a class="admin_option btn btn-success" href="./process_admin_request.php?type=approve&id=' . $adminRequest['id'] . '">
+                echo '<div class= "col-sm-2">';
+                echo '<a class="admin_option btn btn-success" href="./process_admin_request.php?type=approve&id=' . $adminRequest['id'] . '">
                  <span class="approve_btn" ><i class="fa fa-check"></i>Approve</span>
              </a>';
-              echo '<a class="admin_option btn btn-danger" href="./process_admin_request.php?type=reject&id=' . $adminRequest['id'] .
-                '" onclick="return confirm(\'Remove Admin Request From: ' . $adminRequest['email'] . ' ?\');">' . '
+                echo '<a class="admin_option btn btn-danger" href="./process_admin_request.php?type=reject&id=' . $adminRequest['id'] .
+                  '" onclick="return confirm(\'Remove Admin Request From: ' . $adminRequest['email'] . ' ?\');">' . '
                  <span class="reject_btn" ><i class="fa fa-times"></i>Reject</span>
              </a>';
-              //  for col
-              echo '</div>';
+                //  for col
+                echo '</div>';
 
-              //  for row
-              echo '</div>';
-            }
+                //  for row
+                echo '</div>';
+              }
 
-            ?>
-          </div>
+            endif;
 
-          <div class="modal-footer">
+              ?>
+            </div>
 
+            <div class="modal-footer">
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Show Admin Model -->
-    <div class="modal fade" id="adminListModal" tabindex="-1" role="dialog" aria-labelledby="adminListTitle" aria-hidden="true">
-      <div class="modal-dialog " role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="adminListTitle">Admin Requests</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <?php
-            foreach ($adminLists as $admin) {
+      <!-- Show Admin Model -->
+      <div class="modal fade" id="adminListModal" tabindex="-1" role="dialog" aria-labelledby="adminListTitle" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title text-center" id="adminListTitle">Admins</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <?php
+              if ($totalAdmins == 0) :
+                echo '<div class="alert alert-danger text-center"><h4>No Any Admins</h4></div>';
+              else :
+                foreach ($adminLists as $admin) {
 
-              echo '<div class= "row">';
+                  echo '<div class= "row">';
 
 
-              echo '<div class= "col-sm-10">';
-              // echo '<h6>id: ' . $adminRequest['id'] . '</h6>';
-              echo '<h5> Name: ' . $admin['firstName'] . ' ' . $admin['lastName'] . '</h5>';
-              echo '<h5>User Name: ' . $admin['username'] . '</h5>';
-              echo '<h5>Email: ' . $admin['email'] . '</h5>';
-              //  for col
-              echo '</div>';
+                  echo '<div class= "col-sm-10">';
+                  // echo '<h6>id: ' . $adminRequest['id'] . '</h6>';
+                  echo '<h5> Name: ' . $admin['firstName'] . ' ' . $admin['lastName'] . '</h5>';
+                  echo '<h5>User Name: ' . $admin['username'] . '</h5>';
+                  echo '<h5>Email: ' . $admin['email'] . '</h5>';
+                  //  for col
+                  echo '</div>';
 
-              echo '<div class= "col-sm-2">';
-              echo '<a class="admin_option btn btn-danger" href="./process_admin_request.php?type=delete&id=' . $admin['id'] .
-                '" onclick="return confirm(\'Remove Admin : ' . $admin['email'] . ' ?\');">' . '
+                  echo '<div class= "col-sm-2">';
+                  echo '<a class="admin_option btn btn-danger" href="./process_admin_request.php?type=delete&id=' . $admin['id'] .
+                    '" onclick="return confirm(\'Remove Admin : ' . $admin['email'] . ' ?\');">' . '
                  <span class="reject_btn" ><i class="fa fa-trash-o"></i> Delete</span>
              </a>';
-              //  for col
-              echo '</div>';
+                  //  for col
+                  echo '</div>';
 
-              //  for row
-              echo '</div>';
-            }
+                  //  for row
+                  echo '</div>';
+                }
 
-            ?>
-          </div>
+              endif;
 
-          <div class="modal-footer">
+              ?>
+            </div>
 
+            <div class="modal-footer">
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <style>
-      .admin_option {
-        position: relative;
-        display: block;
-        padding: 2px;
-        margin: 2px;
-        /* margin-top: 4px; */
-        text-align: center;
-        text-decoration: none;
-      }
+      <style>
+        .admin_option {
+          position: relative;
+          display: block;
+          padding: 2px;
+          margin: 2px;
+          /* margin-top: 4px; */
+          text-align: center;
+          text-decoration: none;
+        }
 
-      .option:hover {}
-    </style>
+        .option:hover {}
+      </style>

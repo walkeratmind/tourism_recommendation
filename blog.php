@@ -72,6 +72,7 @@ $totalPost = empty($posts) ? 0 : sizeof($posts);
 	#footer-wrapper {
 		position: absolute;
 		bottom: 0;
+		width: 100%;
 	}
 
 	.image-fluid {

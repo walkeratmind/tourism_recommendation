@@ -160,13 +160,6 @@ if ($stmt->execute()) {
 	<?php require_once dirname(__FILE__) . './footer.php'; ?>
 </div>
 
-<style>
-	#footer-wrapper {
-		position: absolute;
-		bottom: 0;
-	}
-</style>
-
 <script>
 	$('.carousel').carousel({
 		interval: 3000

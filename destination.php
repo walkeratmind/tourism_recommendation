@@ -72,7 +72,8 @@ $database = new dbconnect();
 <style>
 	#footer-wrapper {
 		position: absolute;
-		bottom: 0;
+    bottom: 0;
+    width: 100%;
 	}
 </style>
 

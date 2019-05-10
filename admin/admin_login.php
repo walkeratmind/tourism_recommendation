@@ -11,7 +11,7 @@
         require_once dirname(__FILE__) . './../inc/utils.php';
         require_once dirname(__FILE__). './../database/dboperation.php';     
 
-        utils::toastMessage();
+        // utils::toastMessage();
     ?>
 
 </head>
@@ -31,7 +31,7 @@
                         <form class="form-horizontal" method="post" action='../database/admin_login_form.php'>
 
                             <div class="form-group ">
-                                <label for="name" class="cols-sm-10 control-label">Username or Email</label>
+                                <label for="name" class="cols-sm-10 control-label">Email</label>
                                 <div class="cols-sm-10">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -39,7 +39,7 @@
                                                     aria-hidden="true"></i></span>
                                         </div>
                                         <input type="text" class="form-control" name="username" id="last_name"
-                                            placeholder="Username or Email" />
+                                            placeholder="Email" />
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                         </div>
 
                                         <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Enter your Password" />
+                                            placeholder="Password" />
                                     </div>
                                 </div>
                             </div>

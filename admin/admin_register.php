@@ -23,23 +23,6 @@
                     <div class="card-header bg-primary text-center"><h5>Register</h5></div>
                     <div class="card-body">
 
-                        <?php 
-
-// if (isset($_SESSION['message'])) {
-//     echo " <div class='alert alert-" . $_SESSION['msg_type'] . "'>" .
-//         $_SESSION['message'] .
-//         "</div>";
-//     unset($_SESSION['message']);
-// }
-                            
-                            // if (isset($_SESSION['msg_type']) && isset($_SESSION['message'])) {
-                            //     alertMessage($_SESSION['message'], $_SESSION['msg_type']);
-                            //     unset($_SESSION['message']);
-                            //     unset($_SESSION['msg_type']);
-                            // }
-                            // utils::message();
-                    ?>
-
                         <form class="form-horizontal" method="post" action='../database/insert_admin.php'>
 
                             <div class="form-group">
@@ -151,48 +134,6 @@
         </div>
     </div>
 
-
-<!-- for ajax way of registration -->
-    <!-- <script>
-        $(document).ready(function () {
-        $('form').submit(function (event) {
-
-            // get the form data
-            // there are many ways to get this data using jQuery (you can use the class or id also)
-            var formData = {
-                'firstName': $('input[name=firstName]').val(),
-                'lastName': $('input[name=lastName]').val(),
-                'username': $('input[name=username]').val(),
-                'email': $('input[name=email]').val(),
-                'password': $('input[name=password]').val(),
-                'gender': $('input[name=gender]:checked').val()
-            };
-
-            // process the form
-            $.ajax({
-                    type: 'POST', // define the type of HTTP verb we want to use (POST for our form)
-                    url: '../database/insertUser.php', // the url where we want to POST
-                    data: formData, // our data object
-                    dataType: 'json', // what type of data do we expect back from the server
-                    encode: true
-                })
-                // using the done promise callback
-                .done(function (data) {
-
-                    // log data to the console so we can see
-                    console.log(data);
-
-                    // here we will handle errors and validation messages
-                }).fail(function (data) {
-                    console.log(data);
-                });
-
-            // stop the form from submitting the normal way and refreshing the page
-            event.preventDefault();
-        });
-
-        });
-    </script> -->
 </body>
 
 </html>

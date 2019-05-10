@@ -191,6 +191,26 @@ class dboperation
         return $total;
     }
 
+    // GET all request pending to be admim
+    function getAdminByRole($role) {
+        $query = "SELECT * FROM  `admin` WHERE role = '$role' ;";
+
+        // $statement = $this->conn->prepare($query);
+        // $statement->bind_param('s', $role);
+
+        // $statement->execute();
+        // $result = $statement->get_result()->fetch_assoc();
+
+        $data = $this->conn->query($query);
+
+        $result = array();
+        while ($row = $data->fetch_assoc()) {
+            $result[] = $row;
+        }
+
+        return json_encode($result);
+    }
+
     // UPDATE PART
     function updateDestination($name, $location, $description, $image)
     { }
@@ -335,4 +355,5 @@ class dboperation
 
         return json_encode($result);
     }
+
 }

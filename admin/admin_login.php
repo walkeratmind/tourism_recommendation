@@ -11,7 +11,7 @@
         require_once dirname(__FILE__) . './../inc/utils.php';
         require_once dirname(__FILE__). './../database/dboperation.php';     
 
-        // utils::toastMessage();
+        utils::toastMessage();
     ?>
 
 </head>

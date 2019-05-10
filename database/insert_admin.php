@@ -12,13 +12,14 @@
         $firstName = ucfirst(strtolower($_POST['firstName']));
         $lastName = ucfirst(strtolower($_POST['lastName']));
         $username = strtolower($_POST['username']);
+        $admin_role = "pending";
 
-        $query = "INSERT  INTO `admin`(`id`, `firstName`, `lastName`, `username`, `email`, `password`, `gender`)
-            VALUES (NULL, ?, ? , ? , ? , ? , ?) ;";
+        $query = "INSERT  INTO `admin`(`id`, `firstName`, `lastName`, `username`, `email`, `password`, `gender`, `role`)
+            VALUES (NULL, ?, ? , ? , ? , ? , ?, ?) ;";
 
         $stmt = $mysqli -> prepare($query);
-        $stmt -> bind_param('ssssss',$firstName, $lastName, $username, 
-            $_POST['email'], $_POST['password'], $_POST['gender']);
+        $stmt -> bind_param('sssssss',$firstName, $lastName, $username, 
+            $_POST['email'], $_POST['password'], $_POST['gender'], $admin_role);
 
         if ($stmt -> execute()) {
             $_SESSION['message'] = "Registeration Successful";

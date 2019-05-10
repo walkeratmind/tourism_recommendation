@@ -1,23 +1,47 @@
 <?php
 
-  require_once dirname(__FILE__) . './../database/dboperation.php';
-  require_once dirname(__FILE__) . './../inc/utils.php';
+require_once dirname(__FILE__) . './../database/dboperation.php';
+require_once dirname(__FILE__) . './../inc/utils.php';
 
 
-  $db = new dboperation();
+$db = new dboperation();
 
-  $adminTable = "admin";
+// GET All admins
+$adminRole = "admin";
+$result = $db->getAdminByRole($adminRole);
+$adminLists = json_decode($result, true);
+$totalAdmins = empty($adminLists) ? 0 : sizeof($adminLists);
 
-  $result = $db->getSingleData($adminTable, $_SESSION['admin_id']);
-  $admin = json_decode($result, true);
+// get all admin requests
+$adminRole = "pending";
+$result = $db->getAdminByRole($adminRole);
+$adminRequests = json_decode($result, true);
+$totalAdminRequest = empty($adminRequests) ? 0 : sizeof($adminRequests);
 
-  // get all feedbacks
-  $feedbackTable = "feedback";
-  $result = $db->getAll($feedbackTable);
-  $feedbacks = json_decode($result, true);
 
-  $totalFeedbacks = sizeof($feedbacks);
+// function searchForId($array, $id)
+// {
+//   foreach ($array as $key => $val) {
+//     if ($val['id'] === $id) {
+//       return $key;
+//     }
+//   }
+//   return null;
+// }
+// //  Get current logged in admin from Admin list
+// $admin = searchForId($adminLists, $_SESSION['admin_id']);
 
+//  Get current logged in admin from Database
+$adminTable = "admin";
+$result = $db->getSingleData($adminTable, $_SESSION['admin_id']);
+$admin = json_decode($result, true);
+
+// get all feedbacks
+$feedbackTable = "feedback";
+$result = $db->getAll($feedbackTable);
+$feedbacks = json_decode($result, true);
+//sets to 0 if no any feedbacks
+$totalFeedbacks = empty($feedbacks) ? 0 : sizeof($feedbacks);
 ?>
 
 <head>
@@ -56,8 +80,7 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -92,43 +115,43 @@
                   <!-- inner menu: contains the actual data -->
                   <ul class="menu feedbackBox">
 
-                  <?php 
-                  
-                  foreach ($feedbacks as $feedback) {
+                    <?php
 
-                    //get username of the user who have sent feedback
-                    $result = $db->getSingleData('user', $feedback['user_id']);
-                    $user = json_decode($result, true);
-                    // Start Message
-                    echo '<li class="">';
+                    foreach ($feedbacks as $feedback) {
+
+                      //get username of the user who have sent feedback
+                      $result = $db->getSingleData('user', $feedback['user_id']);
+                      $user = json_decode($result, true);
+                      // Start Message
+                      echo '<li class="">';
                       echo '<a href="#" style="text-decoration: none">';
                       // echo '<div class="pull-left">'. 
                       //   '<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">';
                       // echo '</div>';
 
                       echo '<h4 class="">';
-                        echo 'From: '. $user['email'];
-                        
+                      echo 'From: ' . $user['email'];
+
                       echo '</h4>';
 
-                      echo '<p>'. utils::getDefinateString($feedback['feedback'], 50).'</p>';
+                      echo '<p>' . utils::getDefinateString($feedback['feedback'], 50) . '</p>';
 
                       echo '<small class="pull-right"><i class="fa fa-clock-o"></i>' . $feedback['datetime'] . '</small>';
                       echo '</a>';
-                    echo '</li>';
-                    // END Feedback Message
+                      echo '</li>';
+                      // END Feedback Message
 
 
-                  }
-                  
-                  ?>
-                   
+                    }
+
+                    ?>
+
                   </ul>
                 </li>
                 <li class="footer"><a href="#">See All Messages</a></li>
               </ul>
             </li>
-         
+
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -136,9 +159,9 @@
               </a>
               <ul class="dropdown-menu">
 
-                  <h4><?php echo $admin['firstName'] . ' '. $admin['lastName']; ?></h4>
-                  <h5><?php echo $admin['email']; ?></h5>
-                  <h5><?php echo $admin['gender']; ?></h5>
+                <h4><?php echo $admin['firstName'] . ' ' . $admin['lastName']; ?></h4>
+                <h5><?php echo $admin['email']; ?></h5>
+                <h5><?php echo $admin['gender']; ?></h5>
 
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -146,8 +169,7 @@
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="./admin_logout.php?logout=true" onclick="return confirm('Logout?');" name="logout"
-                      class="btn btn-default btn-flat">Log out</a>
+                    <a href="./admin_logout.php?logout=true" onclick="return confirm('Logout?');" name="logout" class="btn btn-default btn-flat">Log out</a>
                   </div>
                 </li>
               </ul>
@@ -198,11 +220,150 @@
               </span>
             </a>
           </li>
-          <li class="">
-            <a href="view_user.php"><i class="fa fa-plane"></i> <span>View Users</span></a>
-          </li>
 
+          <?php if ($admin['role'] == 'superAdmin'): ?>
+          <li class="active treeview menu-open">
+            <a href="#">
+              <i class="fa fa-user-circle-o"></i> <span>Admins</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="">
+                <a href="#" data-toggle="modal" data-target="#adminListModal">
+                  <i class="fa fa-user"></i>
+                  <span>Admins</span>
+                  <span class="pull-right-container">
+                    <span class="label label-primary pull-right"><?php echo $totalAdmins ?></span>
+                  </span>
+                </a>
+              </li>
+
+              <li class="">
+                <a href="#" data-target="#adminRequestModal" data-toggle="modal">
+                  <i class="fa fa-user-plus"></i>
+                  <span>Admin Requests</span>
+                  <span class="pull-right-container">
+                    <span class="label label-primary pull-right"><?php echo $totalAdminRequest ?></span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <?php endif; ?>
         </ul>
       </section>
       <!-- /.sidebar -->
     </aside>
+
+    <!-- show Admin Requests Modal -->
+    <div class="modal fade" id="adminRequestModal" tabindex="-1" role="dialog" aria-labelledby="adminRequestTitle" aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="adminRequestTitle">Admin Requests</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <?php
+            foreach ($adminRequests as $adminRequest) {
+
+              echo '<div class= "row">';
+
+
+              echo '<div class= "col-sm-10">';
+              // echo '<h6>id: ' . $adminRequest['id'] . '</h6>';
+              echo '<h5> Name: ' . $adminRequest['firstName'] . ' ' . $adminRequest['lastName'] . '</h5>';
+              echo '<h5>User Name: ' . $adminRequest['username'] . '</h5>';
+              echo '<h5>Email: ' . $adminRequest['email'] . '</h5>';
+              //  for col
+              echo '</div>';
+
+              echo '<div class= "col-sm-2">';
+              echo '<a class="admin_option btn btn-success" href="./process_admin_request.php?type=approve&id=' . $adminRequest['id'] . '">
+                 <span class="approve_btn" ><i class="fa fa-check"></i>Approve</span>
+             </a>';
+              echo '<a class="admin_option btn btn-danger" href="./process_admin_request.php?type=reject&id=' . $adminRequest['id'] .
+                '" onclick="return confirm(\'Remove Admin Request From: ' . $adminRequest['email'] . ' ?\');">' . '
+                 <span class="reject_btn" ><i class="fa fa-times"></i>Reject</span>
+             </a>';
+              //  for col
+              echo '</div>';
+
+              //  for row
+              echo '</div>';
+            }
+
+            ?>
+          </div>
+
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Show Admin Model -->
+    <div class="modal fade" id="adminListModal" tabindex="-1" role="dialog" aria-labelledby="adminListTitle" aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="adminListTitle">Admin Requests</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <?php
+            foreach ($adminLists as $admin) {
+
+              echo '<div class= "row">';
+
+
+              echo '<div class= "col-sm-10">';
+              // echo '<h6>id: ' . $adminRequest['id'] . '</h6>';
+              echo '<h5> Name: ' . $admin['firstName'] . ' ' . $admin['lastName'] . '</h5>';
+              echo '<h5>User Name: ' . $admin['username'] . '</h5>';
+              echo '<h5>Email: ' . $admin['email'] . '</h5>';
+              //  for col
+              echo '</div>';
+
+              echo '<div class= "col-sm-2">';
+              echo '<a class="admin_option btn btn-danger" href="./process_admin_request.php?type=delete&id=' . $admin['id'] .
+                '" onclick="return confirm(\'Remove Admin : ' . $admin['email'] . ' ?\');">' . '
+                 <span class="reject_btn" ><i class="fa fa-trash-o"></i> Delete</span>
+             </a>';
+              //  for col
+              echo '</div>';
+
+              //  for row
+              echo '</div>';
+            }
+
+            ?>
+          </div>
+
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .admin_option {
+        position: relative;
+        display: block;
+        padding: 2px;
+        margin: 2px;
+        /* margin-top: 4px; */
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .option:hover {}
+    </style>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('location: ../admin/index.php');
             } else if ($admin['role'] == 'pending') {
                 $_SESSION['isAdmin'] = false;
-                $_SESSION['message'] = "Request for Admin Role is pending, Wait till the request is Approved ";
+                $_SESSION['message'] = "Request for Admin Role is Pending, wait till the request is approved by Super Admin";
                 $_SESSION['msg_type'] = "danger";
                 header('location: ../admin/admin_login.php');
             }

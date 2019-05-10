@@ -64,9 +64,17 @@ $database = new dbconnect();
 </div>
 </div>
 
-    <!-- Show Footer -->
-    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>
+<div id="footer-wrapper">
+	<!-- Show footer -->
+	<?php require_once dirname(__FILE__) . './footer.php'; ?>
+</div>
 
+<style>
+	#footer-wrapper {
+		position: absolute;
+		bottom: 0;
+	}
+</style>
 
 <style>
   .card {

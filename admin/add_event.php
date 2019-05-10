@@ -146,14 +146,14 @@ require_once dirname(__FILE__) . './show_top_details.php';
 <!-- /.content-wrapper -->
 
 <!-- Add Destination Form Modal -->
-<div class="modal" id="formModal" tabindex="-1" role="dialog" aria-labelledby="addDestination" aria-hidden="true">
+<div class="modal" id="formModal" tabindex="-1" role="dialog" aria-labelledby="addEvent" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title text-center" id="addDestination">Add Event</h5>
+                <h3 class="modal-title text-center" id="addEvent">Add Event</h5>
             </div>
             <!-- form for adding destination -->
 

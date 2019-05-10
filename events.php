@@ -37,7 +37,7 @@ $database = new dbconnect();
       echo '<div class="card shadow-sm " id="" style="width: 24rem;">';
       echo '<div class="content-layout">';
       echo '<img src=\'', $img_path . $image, '\' style="width: 24rem; height: 18rem"  class="rounded card-img-top" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"  alt="' . $image . '">';
-      echo '<span class="content-detail">' . utils::getDefinateString($description). '</span>';
+      echo '<span class="content-detail">' . utils::getDefinateString($description) . '</span>';
       echo '</div>';
       echo '<div class="card-body">';
       echo '<h5 class="card-title">' . $name . '</h5>';
@@ -46,7 +46,7 @@ $database = new dbconnect();
       echo '</div>';    //end of card body
       echo '<card-footer class=" mx-2" >';
       echo '<div class=" text-muted text-right mr-3" >' . $location . '</div>';
-      echo '<div class=" text-muted text-right mr-3" >' .'Event Date:' . $date . '</div>';
+      echo '<div class=" text-muted text-right mr-3" >' . 'Event Date:' . $date . '</div>';
 
       echo '</card-footer>';
       echo '</div>';
@@ -56,20 +56,22 @@ $database = new dbconnect();
     }
     echo '</div>';
 
-
-
     $stmt->close();
     $mysqli->close();
   }
   ?>
 
 </div>
+<div id="footer-wrapper">
+  <?php require_once dirname(__FILE__) . './footer.php'; ?>
 </div>
 
-<?php require_once dirname(__FILE__) . './footer.php'; ?>
-
-
 <style>
+
+  #footer-wrapper {
+    position: absolute;
+    bottom: 0;
+  }
   .card {
 
     /* transition: all 0.3s; */

@@ -84,7 +84,7 @@ class dboperation
     function login($tableName, $email, $password)
     {
         if ($this->isEmailExist($tableName, $email)) {
-            $query = "SELECT id from " . $tableName . " WHERE email=? AND password=?";
+            $query = "SELECT * from " . $tableName . " WHERE email=? AND password=?";
 
             $statement = $this->conn->prepare($query);
             $statement->bind_param('ss', $email, $password);
@@ -97,18 +97,8 @@ class dboperation
             return false;
         }
 
-        // $statement->execute();
-        // $statement->store_result();
-        // $isIdExist = $statement->num_rows > 0 ? true : false;
-
-
-
         return false;
     }
-
-    // for inserting user and admin in database
-    function insertPerson()
-    { }
 
     //  RETRIEVING PART
 

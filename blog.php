@@ -24,34 +24,34 @@ $totalPost = empty($posts) ? 0 : sizeof($posts);
 		foreach ($posts as $post) {
 			echo '<div class="row blog-post ">';
 
-				echo '<a href="view_post.php?id=' . $post['id'] . '">';
+			echo '<a href="view_post.php?id=' . $post['id'] . '">';
 
-					$user = $db->getSingleData('user', $post['user_id']);
-					$user = json_decode($user, true);
-					// echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
-					echo '<h5>' . $user['username'] . '</h5>';
+			$user = $db->getSingleData('user', $post['user_id']);
+			$user = json_decode($user, true);
+			// echo '<h5>'. $user['firstName'] . ' ' . $user['lastName'] . '</h5>';
+			echo '<h5>' . $user['username'] . '</h5>';
 
-					echo "<div class='col-sm-2' >";
-						if (empty($post['image'])) {
-							$showImage = "<img class='image-fluid' src='./assets/icons/no_image.png' alt='No Image'>";
-						} else {
-							$img_path = "./imageUploads/blog_image/";
-							$showImage = "<img class='image-fluid' src='" . $img_path . $post['image'] . "' alt=''>";
-						}
+			echo "<div class='col-sm-2' >";
+			if (empty($post['image'])) {
+				$showImage = "<img class='image-fluid' src='./assets/icons/no_image.png' alt='No Image'>";
+			} else {
+				$img_path = "./imageUploads/blog_image/";
+				$showImage = "<img class='image-fluid' src='" . $img_path . $post['image'] . "' alt=''>";
+			}
 
-						echo $showImage;
+			echo $showImage;
 
-					echo "</div>";
+			echo "</div>";
 
-					echo "<div class='col-sm-10'>";
+			echo "<div class='col-sm-10'>";
 
-						echo "<h5 id='title'>" . $post['title'] . "</h5>";
-						echo "<p class=''>" . utils::getDefinateString($post['post'], 100) . "</p>";
+			echo "<h5 id='title'>" . $post['title'] . "</h5>";
+			echo "<p class=''>" . utils::getDefinateString($post['post'], 100) . "</p>";
 
-						echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
+			echo "<span id='date'><small>" . $post['datetime'] . "</small></span>";
 
-					echo '</div>';
-				echo "</a>";
+			echo '</div>';
+			echo "</a>";
 
 			echo '</div>';
 		} else :
@@ -64,10 +64,16 @@ $totalPost = empty($posts) ? 0 : sizeof($posts);
 
 </div>
 
-    <!-- Show Footer -->
-    <?php 	require_once dirname(__FILE__) . './footer.php'; ?>
+<div id="footer-wrapper">
+	<?php require_once dirname(__FILE__) . './footer.php'; ?>
+</div>
 
 <style>
+	#footer-wrapper {
+		position: absolute;
+		bottom: 0;
+	}
+
 	.image-fluid {
 		display: block;
 		max-width: 100%;

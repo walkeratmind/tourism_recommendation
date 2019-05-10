@@ -5,13 +5,13 @@ require  dirname(__FILE__) . './header.php';
 
 require_once dirname(__FILE__) . './inc/utils.php';
 
-	$database = new dbconnect();
+$database = new dbconnect();
 
-	// utils::toastClientSide();
+// utils::toastClientSide();
 
-	// $_SESSION['message'] = 'hello';
-	utils::toastMessage();
-	// utils::message();
+// $_SESSION['message'] = 'hello';
+utils::toastMessage();
+// utils::message();
 ?>
 
 <!-- <script>
@@ -147,9 +147,6 @@ if ($stmt->execute()) {
 <div class="container">
 	<!-- <h5>Welcome to Tourism Recommendation</h5> -->
 
-
-
-
 	<?php
 	// require_once './destination.php';
 	require_once './index_suggestion.php';
@@ -158,42 +155,51 @@ if ($stmt->execute()) {
 
 </div>
 
-<?php 	require_once dirname(__FILE__) . './footer.php'; ?>
+<div id="footer-wrapper">
+	<!-- Show footer -->
+	<?php require_once dirname(__FILE__) . './footer.php'; ?>
+</div>
 
-	
-	<script>
-		$('.carousel').carousel({
-			interval: 3000
-		});
+<style>
+	#footer-wrapper {
+		position: absolute;
+		bottom: 0;
+	}
+</style>
 
-		// if ($('.carousel').is(":hover")) {
+<script>
+	$('.carousel').carousel({
+		interval: 3000
+	});
 
-		// }
+	// if ($('.carousel').is(":hover")) {
 
-		// $(document).ready(function () {
-		// 	$(".owl-carousel").owlCarousel({
-		// 		items: 3,
-		// 		loop: true,
-		// 		margin: 10,
-		// 		center: true,
-		// 		nav: true,
-		// 		// autoheight: true,
-		// 		autoplay: true,
-		// 		autoplayTimeout: 2000,
-		// 		autoplayHoverPause: true,
-		// 		responsive: {
-		// 			0: {
-		// 				items: 1
-		// 			},
-		// 			600: {
-		// 				items: 3
-		// 			},
-		// 			1000: {
-		// 				items: 4
-		// 			}
-		// 		}
-		// 	});
-		// });
-	</script>
+	// }
 
-	<!-- TODO : Admin Login and user login feature -->
+	// $(document).ready(function () {
+	// 	$(".owl-carousel").owlCarousel({
+	// 		items: 3,
+	// 		loop: true,
+	// 		margin: 10,
+	// 		center: true,
+	// 		nav: true,
+	// 		// autoheight: true,
+	// 		autoplay: true,
+	// 		autoplayTimeout: 2000,
+	// 		autoplayHoverPause: true,
+	// 		responsive: {
+	// 			0: {
+	// 				items: 1
+	// 			},
+	// 			600: {
+	// 				items: 3
+	// 			},
+	// 			1000: {
+	// 				items: 4
+	// 			}
+	// 		}
+	// 	});
+	// });
+</script>
+
+<!-- TODO : Admin Login and user login feature -->

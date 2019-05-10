@@ -7,7 +7,8 @@ create table admin
     username  varchar(100) not null,
     email     varchar(100) not null,
     password  varchar(100) not null,
-    gender    varchar(100) not null
+    gender    varchar(100) not null,
+    role      varchar(100) null
 );
 
 create table destination

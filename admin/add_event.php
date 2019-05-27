@@ -13,12 +13,11 @@ utils::toastMessage();
 require_once dirname(__FILE__) . './show_top_details.php';
 ?>
 
-<button class="btn btn-lg btn-info  my-2 " data-toggle="modal" data-target="#formModal"><i
-        class="fa fa-plus-square"></i> Add Event</button>
+<button class="btn btn-lg btn-info  my-2 " data-toggle="modal" data-target="#formModal"><i class="fa fa-plus-square"></i> Add Event</button>
 
 <?php
-        // utils::message();
-        ?>
+// utils::message();
+?>
 <!-- Event Lists -->
 
 <div class="box box-info">
@@ -59,73 +58,73 @@ require_once dirname(__FILE__) . './show_top_details.php';
                 <tbody style="overflow-y: scroll; height=680px">
                     <?php
 
-                            $mysqli = $database->connect();
+                    $mysqli = $database->connect();
 
-                            $query = "SELECT * FROM `event` ";
+                    $query = "SELECT * FROM `event` ";
 
-                            $stmt = $mysqli->prepare($query);
+                    $stmt = $mysqli->prepare($query);
 
-                            echo "<script>console.log('hello')</script>";
+                    echo "<script>console.log('hello')</script>";
 
-                            if ($stmt->execute()) {
+                    if ($stmt->execute()) {
 
-                                $stmt->bind_result($id, $name, $location,$date, $description, $image);
+                        $stmt->bind_result($id, $name, $location, $date, $description, $image);
 
-                                $stmt->store_result();
-                                $img_path = "../imageUploads/";
-                                if (!$stmt->num_rows > 0) {
-                                    $output = "<div class='alert alert-info'>No Any Events</div>";
-                                    echo $output;
-                                } else {
-                                    $i = 1;
-                                    while ($stmt->fetch()) {
-                                        echo "<script>console.log('loop')" . $description . "</script>";
-                                        echo "<tr class='data-item'>";
-                                        echo '<td>' . $i++ . '</td>';
-                                        echo '<td>' . $id . '</td>';
-                                        echo '<td>
+                        $stmt->store_result();
+                        $img_path = "../imageUploads/";
+                        if (!$stmt->num_rows > 0) {
+                            $output = "<div class='alert alert-info'>No Any Events</div>";
+                            echo $output;
+                        } else {
+                            $i = 1;
+                            while ($stmt->fetch()) {
+                                echo "<script>console.log('loop')" . $description . "</script>";
+                                echo "<tr class='data-item'>";
+                                echo '<td>' . $i++ . '</td>';
+                                echo '<td>' . $id . '</td>';
+                                echo '<td>
                                                         <div class="img" style="max-width:100%">
                                                             <img src=\'', $img_path . $image, '\'style="width: 38rem;"
                                                                 class="card-img-top img-fluid img-thumbnail" alt=' . $image . '>
                                                         </div>
                                                     </td>';
-                                        echo '<td>
+                                echo '<td>
                                                         <h3 class="">' . $name . '</h3>
                                                     </td>';
-                                        echo '<td>' . $location . '</td>';
+                                echo '<td>' . $location . '</td>';
 
-                                        echo '<td>' . $date . '</td>';
+                                echo '<td>' . $date . '</td>';
 
-                                        // echo '<td>' . $description . '</td>';
-    
-                                        echo '<td>
-                                            <p id="wrapper">'. utils::getDefinateString($description) . 
-                                            '</p>
+                                // echo '<td>' . $description . '</td>';
+
+                                echo '<td>
+                                            <p id="wrapper">' . utils::getDefinateString($description) .
+                                    '</p>
                                         </td>';
-    
-                                        echo '<td>' . '' .
-                                            '<a class="option" href="">
+
+                                echo '<td>' . '' .
+                                    '<a class="option" href="">
                                                 <span><i class="fa fa-list"></i>View</span>
                                             </a>' .
-    
-                                            '<a class="option" href="./add_event_form.php?id=' . $id . '">
+
+                                    '<a class="option" href="./add_event_form.php?id=' . $id . '">
                                                 <span class="update_btn" ><i class="fa fa-edit"></i>Update</span>
                                             </a>' .
-    
-                                            '<a class="option" href="../database/delete_event.php?id=' . $id . '" onclick="return confirm(\'Remove destination: ' . $name . ' ?\');">' .
-                                            '<span><i class="fa fa-trash"></i>Remove</span>' . '</a>' .
-    
-                                            '</td>';
-    
-                                        // echo '<td id="option">'. 'Delete' .   '</td>';
-    
-                                        echo "</tr>";
-                                    }
-                                }
+
+                                    '<a class="option" href="../database/delete_event.php?id=' . $id . '" onclick="return confirm(\'Remove destination: ' . $name . ' ?\');">' .
+                                    '<span><i class="fa fa-trash"></i>Remove</span>' . '</a>' .
+
+                                    '</td>';
+
+                                // echo '<td id="option">'. 'Delete' .   '</td>';
+
+                                echo "</tr>";
                             }
-                            $stmt->close();
-                            $mysqli->close();
-                            ?>
+                        }
+                    }
+                    $stmt->close();
+                    $mysqli->close();
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -145,7 +144,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
 </div>
 <!-- /.content-wrapper -->
 
-<!-- Add Destination Form Modal -->
+<!-- Add Event Form Modal -->
 <div class="modal" id="formModal" tabindex="-1" role="dialog" aria-labelledby="addEvent" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -164,8 +163,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
                         <label for="Name">Event Name</label>
                         <div class="input-group">
                             <span class="input-group-addon" id="name-input">#</span>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name"
-                                aria-describedby="name-input" required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-describedby="name-input" required>
                         </div>
                     </div>
 
@@ -174,8 +172,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
                         <div class="input-group">
                             <span class="input-group-addon" id="location-input">
                                 <i class="fa fa-location-arrow"></i></span>
-                            <input type="text" class="form-control" id="location" name="location" placeholder="Location"
-                                aria-describedby="location-input" required>
+                            <input type="text" class="form-control" id="location" name="location" placeholder="Location" aria-describedby="location-input" required>
                         </div>
                     </div>
 
@@ -186,8 +183,8 @@ require_once dirname(__FILE__) . './show_top_details.php';
                                 <div class="input-group">
                                     <span class="input-group-addon" id="date-input">
                                         <i class="fa fa-location-arrow"></i></span>
-                                    <input type="date" class="form-control" id="date" name="date" value="01/01/2019"
-                                         aria-describedby="date-input" required>
+                                    <input type="date" class="form-control" id="event_date" name="date" aria-describedby="date-input"
+                                    data-toggle="tooltip" data-placement="top" title="Select event days after 3 days from now onwards" required>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +195,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" name='description' id="description">
+                        <textarea rows="10" class="form-control" style="resize:none;" name="description" placeholder="write description here..."></textarea>
 
                         <!-- <div id="editor" class="editor-container">
                         </div> -->
@@ -285,7 +282,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
 <!-- for editor -->
 <script>
     // for content overlay for option menu
-    $(document).ready(function () {
+    $(document).ready(function() {
 
 
         // $.ajax({
@@ -299,6 +296,34 @@ require_once dirname(__FILE__) . './show_top_details.php';
 
         // })
 
+        // var maxDate = year + '-' + month + '-' + day;
+        // $('#event_date').attr('min', maxDate);
+
+        $eventDate = $('#event_date');
+        var eventPostDelay = 3; // event can only be posted 3 days ago
+        $(function() {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate() + eventPostDelay;
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+            alert(maxDate);
+            $('#event_date').attr('min', maxDate);
+        });
+
+        $eventDate.click(function() {
+            $eventDate.tooltip('show');
+            $eventDate.tooltip();
+        }, {
+            $eventDate.tooltip('hide');
+        })
+
     })
 
     let $optionMenu = $('.option');
@@ -306,136 +331,29 @@ require_once dirname(__FILE__) . './show_top_details.php';
     // $(this).next('.option').hide();
 
     $dataItem = $('.data-item');
-    $dataItem.hover(function () {
-    $optionMenu.show();
+    $dataItem.hover(function() {
+        $optionMenu.show();
 
-    // $(this).next('.option').fadeIn();
-    }, function () {
-    $optionMenu.hide();
-    //    $(this).next('.option').fadeIn();
-
-    });
+        // $(this).next('.option').fadeIn();
+    }, function() {
+        $optionMenu.hide();
+        //    $(this).next('.option').fadeIn();
 
     });
 
+    // on form submission
+    var form = document.querySelector('form');
+    form.onsubmit = function() {
+        // Populate hidden form on submit
+        var description = document.querySelector('input[name=description]');
+        description.value = JSON.stringify(quill.getContents());
 
-    // for Quill Editor
-    var toolbarOptions = [
-        [{
-            'font': []
-        }],
-        [{
-            'header': [1, 2, 3, 4, 5, 6, false]
-        }],
-        [{
-            'header': 1
-        }, {
-            'header': 2
-        }], // custom button values
-        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-        ['blockquote', 'code-block', 'image', 'video'],
-        [{
-            'list': 'ordered'
-        }, {
-            'list': 'bullet'
-        }],
-        [{
-            'script': 'sub'
-        }, {
-            'script': 'super'
-        }], // superscript/subscript
-        [{
-            'indent': '-1'
-        }, {
-            'indent': '+1'
-        }], // outdent/indent
-        // [{ 'direction': 'rtl' }],                         // text direction
+        console.log("Submitted", $(form).serialize(), $(form).serializeArray());
 
-        //   [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-
-        [{
-            'color': []
-        }, {
-            'background': []
-        }], // dropdown with defaults from theme
-        [{
-            'align': []
-        }],
-
-        ['clean'] // remove formatting button
-    ];
-    var quill = new Quill('#editor', {
-        debug: 'info',
-        modules: {
-            toolbar: toolbarOptions
-        },
-        placeholder: 'Magical Lines here...',
-        theme: 'snow'
-    });
-
-    // If the user hits backspace at the beginning of list or blockquote,
-    // remove the format instead delete any text
-    quill.keyboard.addBinding({
-        key: Keyboard.keys.BACKSPACE
-    }, {
-        collapsed: true,
-        format: ['blockquote', 'list'],
-        offset: 0
-    }, function (range, context) {
-        if (context.format.list) {
-            this.quill.format('list', false);
-        } else {
-            this.quill.format('blockquote', false);
-        }
-    });
-
-    // If the user hits enter on an empty list, remove the list instead
-    quill.keyboard.addBinding({
-        key: Keyboard.keys.ENTER
-    }, {
-        empty: true, // implies collapsed: true and offset: 0
-        format: ['list']
-    }, function (range, context) {
-        this.quill.format('list', false);
-    });
-
-    var range = quill.getSelection();
-    if (range) {
-        if (range.length == 0) {
-            console.log('User cursor is at index', range.index);
-        } else {
-            var text = quill.getText(range.index, range.length);
-            console.log('User has highlighted: ', text);
-        }
-    } else {
-        console.log('User cursor is not in editor');
-    }
-
-    quill.on('text-change', function () {
-
-                var editorContent = quill.root.innerHTML;
-
-                <?php $content = '<script>editorContent
-</script>';
-?>
-console.log("editor" + editorContent);
-document.getElementById('#htmlContent').innerHTML = editorContent;
-})
-
-
-// on form submission
-var form = document.querySelector('form');
-form.onsubmit = function() {
-// Populate hidden form on submit
-var description = document.querySelector('input[name=description]');
-description.value = JSON.stringify(quill.getContents());
-
-console.log("Submitted", $(form).serialize(), $(form).serializeArray());
-
-// No back end to actually submit to!
-alert('Open the console to see the submit data!')
-return false;
-};
+        // No back end to actually submit to!
+        alert('Open the console to see the submit data!')
+        return false;
+    };
 </script>
 
 <?php require_once dirname(__FILE__) . './admin_footer.php';

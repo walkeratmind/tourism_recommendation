@@ -36,7 +36,7 @@ class dboperation
         return $statement->num_rows > 0;
     }
 
-    function isUsernameExist($username, $tableName)
+    function isUsernameExist($tableName, $username)
     {
         $query = "SELECT id from " . $tableName . " WHERE username=?";
 

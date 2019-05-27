@@ -30,22 +30,22 @@ utils::toastMessage();
         <div class="box-body">
             <?php
 
-                $db = new dboperation();
-                // destiantion id is assigned in javascript in bottom script part
+            $db = new dboperation();
+            // destiantion id is assigned in javascript in bottom script part
 
-                $destination_id = $_GET['id'] ?? '';
-                // $destination_id = 'id';
-                $result = $db->getSingleData('destination', $destination_id);
+            $destination_id = $_GET['id'] ?? '';
+            // $destination_id = 'id';
+            $result = $db->getSingleData('destination', $destination_id);
 
-                $destination =  json_decode($result, true);
+            $destination =  json_decode($result, true);
 
             ?>
 
             <form class="" action="../database/update_destination.php" method="POST" enctype='multipart/form-data'>
 
-            <input type="hidden" name="id" value="<?php echo $destination_id; ?>">
+                <input type="hidden" name="id" value="<?php echo $destination_id; ?>">
 
-            <!-- UNCOMMENT this if you want to make id visible but readonly
+                <!-- UNCOMMENT this if you want to make id visible but readonly
              in input field but comment above line FIRST -->
 
                 <!-- <div class="form-group">
@@ -59,9 +59,7 @@ utils::toastMessage();
                     <label for="Name">Name</label>
                     <div class="input-group">
                         <span class="input-group-addon" id="name-input">#</span>
-                        <input type="text" class="form-control" id="name" name="name"
-                            value="<?php echo $destination['name']; ?>" placeholder="Name" aria-describedby="name-input"
-                            required>
+                        <input type="text" class="form-control" id="name" name="name" value="<?php echo $destination['name']; ?>" placeholder="Name" aria-describedby="name-input" required>
                     </div>
                 </div>
 
@@ -70,19 +68,15 @@ utils::toastMessage();
                     <div class="input-group">
                         <span class="input-group-addon" id="location-input">
                             <i class="fa fa-location-arrow"></i></span>
-                        <input type="text" class="form-control" id="location" name="location"
-                            value="<?php echo $destination['location']; ?>" placeholder="Location"
-                            aria-describedby="location-input" required>
+                        <input type="text" class="form-control" id="location" name="location" value="<?php echo $destination['location']; ?>" placeholder="Location" aria-describedby="location-input" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" name='description'
-                        value="<?php echo $destination['description']; ?>" id="description">
-
-                    <div id="editor" class="editor-container">
-                    </div>
+                    <textarea rows="10" class="form-control" style="resize:none;" name="description" id="description"><?php echo $destination['description']; ?></textarea>
+                    <!-- <div id="editor" class="editor-container">
+                    </div> -->
 
 
                 </div>
@@ -90,8 +84,7 @@ utils::toastMessage();
                 <div class="form-group">
                     <label for="imageFile">Select Image</label>
                     <!-- MAX_FILE_SIZE must precede the file input field -->
-                    <input type="file" name="image" id="imageFile" value="<?php echo $destination['image']; ?>"
-                        required />
+                    <input type="file" name="image" id="imageFile" value="<?php echo $destination['image']; ?>" required />
                 </div>
                 <div class="modal-footer mx-auto" style="text-align:center;">
                     <a href="./add_destination.php">
@@ -121,7 +114,7 @@ utils::toastMessage();
 <!-- for editor -->
 <script>
     // for content overlay for option menu
-    $(document).ready(function () {
+    $(document).ready(function() {
 
 
         // $.ajax({
@@ -200,7 +193,7 @@ utils::toastMessage();
         collapsed: true,
         format: ['blockquote', 'list'],
         offset: 0
-    }, function (range, context) {
+    }, function(range, context) {
         if (context.format.list) {
             this.quill.format('list', false);
         } else {
@@ -214,7 +207,7 @@ utils::toastMessage();
     }, {
         empty: true, // implies collapsed: true and offset: 0
         format: ['list']
-    }, function (range, context) {
+    }, function(range, context) {
         this.quill.format('list', false);
     });
 
@@ -230,13 +223,13 @@ utils::toastMessage();
         console.log('User cursor is not in editor');
     }
 
-    quill.on('text-change', function () {
+    quill.on('text-change', function() {
 
                 var editorContent = quill.root.innerHTML;
 
                 <?php $content = '<script>editorContent
 </script>';
-?>
+                ?>
 console.log("editor" + editorContent);
 document.getElementById('#htmlContent').innerHTML = editorContent;
 })

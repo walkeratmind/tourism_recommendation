@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         // Valid file extensions
-        $extensions_arr = array("jpg", "jpeg", "png", "gif");
+        $extensions_arr = array("jpg", "jpeg", "png", "gif", "JPG");
 
         // Check extension
         if (in_array($imageFileType, $extensions_arr)) {
@@ -52,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             $stmt->close();
             $mysqli->close();
+        } else {
+            $_SESSION['message'] = "Failed to Add Destination, Check your Image File Type";
+            $_SESSION['msg_type'] = "danger";
         }
     }
 }

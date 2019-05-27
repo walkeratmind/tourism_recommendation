@@ -68,11 +68,12 @@ $database = new dbconnect();
 
 <style>
 
-  #footer-wrapper {
+/* code to put footer in bottom when list is empty */
+  /* #footer-wrapper {
     position: absolute;
     bottom: 0;
     width: 100%;
-  }
+  } */
   .card {
 
     /* transition: all 0.3s; */

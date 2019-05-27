@@ -94,7 +94,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
                                         </td>';
 
                                     echo '<td>' . '' .
-                                        '<a class="option" href="">
+                                        '<a class="option" href="./destination_view.php?id='. $id .'">
                                             <span><i class="fa fa-list"></i>View</span>
                                         </a>' .
 
@@ -168,8 +168,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" name='description' id="summernote"></textarea>
-
+                        <textarea rows="10" class="form-control" style="resize:none;" name="description" placeholder="write description here..."></textarea>
                         <!-- <div id="editor" class="editor-container">
                         </div> -->
 

@@ -69,13 +69,14 @@ $database = new dbconnect();
 	<?php require_once dirname(__FILE__) . './footer.php'; ?>
 </div>
 
-<style>
+<!-- code to put footer in bottom when list is empty -->
+<!-- <style>
 	#footer-wrapper {
 		position: absolute;
     bottom: 0;
     width: 100%;
 	}
-</style>
+</style> -->
 
 <style>
   .card {

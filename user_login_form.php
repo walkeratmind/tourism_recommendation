@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-        // require_once './inc/lib.php';
-        require_once dirname(__FILE__). './database/dboperation.php';     
-        require_once dirname(__FILE__) . './header.php';
-
-        // utils::toastMessage();
-        utils::checkUserLogin();
-    ?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login</title>
+    <title>User Login</title>
+    <?php
+    // require_once './inc/lib.php';
+    require_once dirname(__FILE__) . './database/dboperation.php';
+    require_once dirname(__FILE__) . './header.php';
+
+    // utils::toastMessage();
+    // utils::checkUserLogin();
+    ?>
 
 </head>
 
@@ -26,9 +26,9 @@
                     <div class="card-header">Login</div>
                     <div class="card-body ">
 
-                        <?php 
-                                utils::message();
-                                ?>
+                        <?php
+                        utils::message();
+                        ?>
                         <form class="form-horizontal needs-validation" novalidate method="post" action='./database/user_login_form.php'>
 
                             <div class="form-group ">
@@ -36,11 +36,9 @@
                                 <div class="cols-sm-10">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-users"
-                                                    aria-hidden="true"></i></span>
+                                            <span class="input-group-text"><i class="fas fa-users" aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" name="username" id="last_name"
-                                            placeholder="Username or Email" required />
+                                        <input type="text" class="form-control" name="username" id="last_name" placeholder="Username or Email" required />
                                     </div>
                                 </div>
                             </div>
@@ -51,19 +49,16 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
 
-                                            <span class="input-group-text"><i class="fa fa-lock fa-lg"
-                                                    aria-hidden="true"></i></span>
+                                            <span class="input-group-text"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
                                         </div>
 
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Enter your Password" required/>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group ">
-                                <button type="submit" name="login"
-                                    class="btn btn-primary btn-lg btn-block login-button">Login</button>
+                                <button type="submit" name="login" class="btn btn-primary btn-lg btn-block login-button">Login</button>
                             </div>
                             <div class="login-register">
                                 <a class="btn btn-primary btn-lg btn-block" href="user_register.php">Register</a>
@@ -78,14 +73,14 @@
 </body>
 
 <script>
-    (function () {
+    (function() {
         'use strict';
-        window.addEventListener('load', function () {
+        window.addEventListener('load', function() {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();

@@ -4,7 +4,7 @@ require_once dirname(__FILE__) .'./../database/dboperation.php';
 
 $db = new dboperation();
 
-if (isset($_GET['logout'])) {
+if (isset($_GET['logout']) && $_GET['logout'] == true) {
 
     // unset($_SESSION['email']);
     unset($_SESSION['isAdmin']);

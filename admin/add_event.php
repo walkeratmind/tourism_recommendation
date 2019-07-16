@@ -301,6 +301,7 @@ require_once dirname(__FILE__) . './show_top_details.php';
 
         $eventDate = $('#event_date');
         var eventPostDelay = 3; // event can only be posted 3 days ago
+        
         $(function() {
             var dtToday = new Date();
 
@@ -314,12 +315,12 @@ require_once dirname(__FILE__) . './show_top_details.php';
 
             var maxDate = year + '-' + month + '-' + day;
             alert(maxDate);
-            $('#event_date').attr('min', maxDate);
+            $eventDate.attr('min', maxDate);
         });
 
         $eventDate.click(function() {
             $eventDate.tooltip('show');
-            $eventDate.tooltip();
+            // $eventDate.tooltip();
         }, {
             $eventDate.tooltip('hide');
         })
